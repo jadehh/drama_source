@@ -1,4 +1,4 @@
-package com.example.dramasource
+package com.jadehh.dramasource
 
 import io.flutter.embedding.android.FlutterActivity
 
