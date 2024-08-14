@@ -1,3 +1,12 @@
+/*
+ * @Author: jadehh
+ * @Date: 2024-07-11 13:25:34
+ * @LastEditTime: 2024-07-30 14:03:58
+ * @LastEditors: jadehh
+ * @Description: 
+ * @FilePath: \dramasource\lib\routes\app_routes.dart
+ * 
+ */
 part of 'app_pages.dart';
 // DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
 
@@ -15,6 +24,8 @@ abstract class Routes {
   static const LANGUAGESETTING = _Paths.LANGUAGESETTING;
   // ignore: constant_identifier_names
   static const DOWNLOAD = _Paths.DOWNLOAD;
+  // ignore: constant_identifier_names
+  static const DETAIL = _Paths.DETAIL;
 }
 
 abstract class _Paths {
@@ -31,4 +42,6 @@ abstract class _Paths {
   static const LANGUAGESETTING = '/setting/language';
   // ignore: constant_identifier_names
   static const DOWNLOAD = '/download';
+    // ignore: constant_identifier_names
+  static const DETAIL = '/detail';
 }

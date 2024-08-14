@@ -7,6 +7,8 @@
  * @Desc     :
  */
 
+import 'package:dramasource/event/focus_state.dart';
+import 'package:dramasource/page/base/views/base_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class SettingAppBarView extends StatelessWidget {
@@ -26,20 +28,10 @@ class SettingAppBarView extends StatelessWidget {
             title,
             style: const TextStyle(color: Colors.white, fontSize: 24),
           )),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.upload,
-                color: Colors.white,
-              )),
-          const Padding(padding: EdgeInsets.only(right: 18)),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.download,
-                color: Colors.white,
-              )),
-          const Padding(padding: EdgeInsets.only(right: 2)),
+          FocusState.instance.focusWidget(BaseIconButton(Icons.upload,(){})),
+          const Padding(padding: EdgeInsets.only(right: 35)),
+          FocusState.instance.focusWidget(BaseIconButton(Icons.download, (){})),
+          const Padding(padding: EdgeInsets.only(right: 10)),
         ],
       ),
     );

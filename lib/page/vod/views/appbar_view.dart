@@ -6,35 +6,21 @@
  * @Software : Samples
  * @Desc     :
  */
+import 'package:dramasource/event/focus_state.dart';
+import 'package:dramasource/page/base/views/base_icon_button.dart';
 import 'package:dramasource/page/vod/views/search_view.dart';
 import 'package:flutter/material.dart';
  
 class AppBarView extends StatelessWidget {
   const AppBarView({super.key});
-  
   @override
   Widget build(BuildContext context) {
     return Row(
         children: [
-          IconButton(
-              icon: const Icon(Icons.donut_large_outlined),
-              onPressed: () {
-                // 处理搜索逻辑
-              },
-            ),
-          const Expanded(child: SearchView()),
-          IconButton(
-              icon: const Icon(Icons.star),
-              onPressed: () {
-                // 处理搜索逻辑
-              },
-            ),
-          IconButton(
-              icon: const Icon(Icons.history),
-              onPressed: () {
-                // 处理搜索逻辑
-              },
-            ),
+          FocusState.instance.focusWidget(BaseIconButton(Icons.donut_large_outlined, (){})),
+          Expanded(child: FocusState.instance.focusWidget( const SearchView())),
+          FocusState.instance.focusWidget(BaseIconButton(Icons.star, (){})),
+          FocusState.instance.focusWidget(BaseIconButton(Icons.history, (){}))
         ],
       );
   }

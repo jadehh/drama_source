@@ -8,6 +8,8 @@
  */
 
 import 'package:dramasource/core/language/local.dart';
+import 'package:dramasource/event/focus_state.dart';
+import 'package:dramasource/page/base/views/base_icon_button.dart';
 import 'package:dramasource/page/root/controllers/root_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,26 +27,23 @@ class ButtomView extends GetView<RootController> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Tooltip(
-                  message: Local.navVod.tr,
-                  child: IconButton(
-                      onPressed: () {
-                        controller.changeBottomBarIndex(0);
-                      },
-                      icon: const Icon(Icons.video_label))),
+                message: Local.navVod.tr,
+                child: FocusState.instance.focusWidget(
+                 BaseIconButton(Icons.video_label, (){
+                      controller.changeBottomBarIndex(0);
+                 }) 
+                )
+              ),
               Tooltip(
                   message: Local.navSetting.tr,
-                  child: IconButton(
-                      onPressed: () {
+                  child: FocusState.instance.focusWidget(BaseIconButton(Icons.settings, (){
                         controller.changeBottomBarIndex(1);
-                      },
-                      icon: const Icon(Icons.settings))),
+                  }))),
               Tooltip(
                   message: Local.navDownload.tr,
-                  child: IconButton(
-                      onPressed: () {
+                  child:FocusState.instance.focusWidget(BaseIconButton(Icons.download, (){
                         controller.changeBottomBarIndex(2);
-                      },
-                      icon: const Icon(Icons.download))),
+                  }))),
             ],
           ),
         ));

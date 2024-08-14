@@ -24,6 +24,9 @@ class Messages extends Translations {
           Local.simplifiedChinese: Local.simplifiedChinese,
           Local.wallPaper: Local.wallPaper,
           Local.about: Local.about,
+          //Dialog
+          Local.cancel:Local.cancel,
+
         },
         'zh_HK': {
           Local.appName: "劇源",
@@ -37,6 +40,8 @@ class Messages extends Translations {
           Local.simplifiedChinese: "簡體中文",
           Local.wallPaper: "壁紙",
           Local.about: "關於",
+          //Dialog
+          Local.cancel:"取消",
         },
         'en_US': {
           Local.appName: "DramaSource",
@@ -50,6 +55,8 @@ class Messages extends Translations {
           Local.simplifiedChinese: "Simplified Chinese",
           Local.wallPaper: "wallPaper",
           Local.about: "about",
+          //Dialog
+          Local.cancel:"cancel",
         },
       };
 }

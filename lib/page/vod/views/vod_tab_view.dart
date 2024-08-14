@@ -22,11 +22,13 @@ class VodTabView extends GetView<VodTabController> {
         builder: (controller) {
           return DefaultTabController(
             length: pageCount,
-            child: Column(children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               TabBar(
                 tabAlignment: TabAlignment.start,
-                labelPadding: const EdgeInsets.symmetric(horizontal: 20), // 设置水平内边距
-                labelColor: Colors.blue,
+                labelPadding:
+                    const EdgeInsets.fromLTRB(10, 5, 10, 5), // 设置水平内边距
+                labelColor: Colors.red,
                 controller: controller.tabController,
                 tabs: controller.tabs,
                 isScrollable: true,
@@ -34,7 +36,8 @@ class VodTabView extends GetView<VodTabController> {
               Expanded(
                   child: TabBarView(
                       controller: controller.tabController,
-                      children: controller.items))
+                      children: controller.items),
+                  )
             ]),
           );
         });

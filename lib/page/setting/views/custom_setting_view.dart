@@ -1,13 +1,16 @@
 /*
  * @Author: jadehh
  * @Date: 2024-07-16 19:30:30
- * @LastEditTime: 2024-07-17 09:33:39
+ * @LastEditTime: 2024-08-09 09:39:47
  * @LastEditors: jadehh
  * @Description: 
  * @FilePath: \dramasource\lib\page\setting\views\custom_setting_view.dart
  * 
  */
+import 'package:dramasource/event/focus_state.dart';
+import 'package:dramasource/page/base/views/base_image_icon_button.dart';
 import 'package:dramasource/page/setting/controllers/normal_setting_controller.dart';
+import 'package:dramasource/theme/out_line_button_custom_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +21,8 @@ class CustomSettingView extends GetView<NormalSettingController> {
   final VoidCallback onPressed1;
   final VoidCallback onPressed2;
   final IconData iconData;
-  const CustomSettingView(this.name, this.text, this.onPressed,this.onPressed1, this.onPressed2,this.iconData,
+  const CustomSettingView(this.name, this.text, this.onPressed, this.onPressed1,
+      this.onPressed2, this.iconData,
       {super.key});
 
   @override
@@ -28,39 +32,22 @@ class CustomSettingView extends GetView<NormalSettingController> {
         child: Row(
           children: [
             Expanded(
-                child: Container(
-                    decoration: BoxDecoration(
-                        // 边框的样式
-                        border:
-                            Border.all(color: Colors.black.withOpacity(0.1)),
-                        borderRadius: BorderRadius.circular(5.0),
-                        color: Colors.black.withOpacity(0.1)),
-                    child: ListTile(
-                      onTap: () {
-                        onPressed();
-                      },
-                      title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(name),
-                            Text(text),
-                          ]),
-                    ))),
-            const Padding(padding: EdgeInsets.only(left: 8)),
-            IconButton(
-                onPressed: onPressed1,
-                icon: const Icon(
-                  Icons.home,
-                  size: 32,
-                )),
-                            const Padding(padding: EdgeInsets.only(left: 8)),
-            IconButton(
-                onPressed: onPressed2,
-                icon:  Icon(
-                  iconData,
-                  size: 32,
-                ))
-          ],
+                child: FocusState.instance.focusWidget(OutlinedButton(
+              style: OutLineButtonCustomStyle().lightSettingOutlineButtonStyle(),
+              onPressed: onPressed,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(name),
+                    Text(text),
+                  ]),
+            ))),
+            const Padding(padding: EdgeInsets.only(left: 20)),
+            FocusState.instance.focusWidget(BaseImageIconButton(Icons.home, onPressed1)),
+            const Padding(padding: EdgeInsets.only(left: 20)),
+            FocusState.instance.focusWidget(BaseImageIconButton(Icons.history, onPressed2)),
+          ]
+
         ));
   }
 }

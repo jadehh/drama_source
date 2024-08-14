@@ -25,9 +25,11 @@ class BaseController extends GetxController {
     });
   }
 
+  
+
   @override
   void dispose() {
-    super.dispose();
     EventBusUtil.instance.getDefaultEvent().destroy();
+    super.dispose();
   }
 }

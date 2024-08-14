@@ -19,4 +19,10 @@ class Local {
   static const String simplifiedChinese = "简体中文";
   static const String wallPaper = '壁纸';
   static const String about = "关于";
+
+
+  //Dialog
+  static const String cancel = "取消";
+
+
 }

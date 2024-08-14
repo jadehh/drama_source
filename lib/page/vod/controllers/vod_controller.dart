@@ -1,14 +1,15 @@
 /*
- * @Author: jadehh
- * @Date: 2024-07-11 10:59:30
- * @LastEditTime: 2024-07-19 15:19:54
- * @LastEditors: jadehh
- * @Description: 
- * @FilePath: \dramasource\lib\page\vod\controllers\vod_controller.dart
- * 
+ * @File     : vod_controller.dart
+ * @Author   : jade
+ * @Date     : 2024/08/09 02:10:44
+ * @Email    : jadehh@1ive.com
+ * @Software : Samples
+ * @Desc     :
  */
-import 'package:dramasource/page/base/controllers/base_controller.dart';
-
-class VodController extends BaseController {
+import 'package:get/get.dart';
+class VodController extends GetxController {
 
 }
+
+
+

@@ -7,6 +7,8 @@
  * @Desc     :
  */
 
+import 'package:dramasource/page/detail/bindings/vod_detail_binding.dart';
+import 'package:dramasource/page/detail/views/vod_detail_view.dart';
 import 'package:dramasource/page/download/bindings/download_binding.dart';
 import 'package:dramasource/page/download/views/download_view.dart';
 import 'package:dramasource/page/setting/bindings/language_binding.dart';
@@ -49,6 +51,13 @@ class AppPages {
       // preventDuplicates: true,
       page: () => const DownloadView(),
       binding: DownloadBinding(),
+    ),
+     GetPage(
+      name: _Paths.DETAIL,
+      transition: Transition.downToUp,
+      // preventDuplicates: true,
+      page: () =>  const VodDetailView(),
+      binding: VodDetailBinding(),
     ),
   ];
 

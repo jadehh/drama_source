@@ -16,7 +16,7 @@ class BaseAppBarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 60,
       child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -7,7 +7,9 @@
  * @Desc     :
  */
 
+import 'package:dramasource/event/focus_state.dart';
 import 'package:dramasource/page/setting/controllers/normal_setting_controller.dart';
+import 'package:dramasource/theme/out_line_button_custom_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,31 +18,20 @@ class NormalSettingView extends GetView<NormalSettingController> {
   final String text;
   final VoidCallback onPressed;
   const NormalSettingView(this.name, this.text, this.onPressed, {super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.all(8),
-        child: Container(
-          decoration: BoxDecoration(
-            // 边框的样式
-            border: Border.all(color: Colors.black.withOpacity(0.1)),
-            borderRadius: BorderRadius.circular(5.0),
-            color: Colors.black.withOpacity(0.1),
-          ),
-          child: ListTile(
-            onTap: () {
-              onPressed();
-            },
-            title: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Expanded(
-                child: Text(name),
-              ),
-              Text(text, style: const TextStyle(fontSize: 12)),
-              const Padding(padding: EdgeInsets.only(left: 10)),
-              const Icon(Icons.chevron_right)
+      padding: const EdgeInsets.all(8),
+      child: FocusState.instance.focusWidget(OutlinedButton(
+        style: OutLineButtonCustomStyle().lightSettingOutlineButtonStyle(), 
+        onPressed: onPressed,
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(child: Text(name)),
+              Text(text),
             ]),
-          ),
-        ));
+      )),
+    );
   }
 }

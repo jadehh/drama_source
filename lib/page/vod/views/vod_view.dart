@@ -1,7 +1,7 @@
 /*
  * @Author: jadehh
  * @Date: 2024-07-11 10:59:30
- * @LastEditTime: 2024-07-19 15:22:07
+ * @LastEditTime: 2024-08-12 14:00:39
  * @LastEditors: jadehh
  * @Description: 
  * @FilePath: \dramasource\lib\page\vod\views\vod_view.dart
@@ -24,6 +24,7 @@ class VodView extends GetView<VodController> {
   @override
   Widget build(BuildContext context) {
      return GetBuilder<VodController>(
+        id: "Vod",
         init: VodController(),
         builder: (controller) { return Scaffold(
         body: Container(
@@ -32,7 +33,7 @@ class VodView extends GetView<VodController> {
                   image: AssetImage(FileUtil.getWall(Setting.getWall())),
                   fit: BoxFit.cover),
             ),
-          child: const Column(children: [
+          child:  const Column(children: [
           SizedBox(
       height: 60.0, // 设置高度
       child: AppBarView(),

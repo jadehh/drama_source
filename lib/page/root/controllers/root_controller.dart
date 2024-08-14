@@ -6,13 +6,14 @@
  * @Software : Samples
  * @Desc     :
  */
+import 'package:dramasource/page/base/controllers/base_controller.dart';
 import 'package:dramasource/page/download/views/download_view.dart';
 import 'package:dramasource/page/setting/views/language_setting_view.dart';
 import 'package:dramasource/page/setting/views/setting_view.dart';
 import 'package:dramasource/page/vod/views/vod_view.dart';
 import 'package:get/get.dart';
 
-class RootController extends GetxController {
+class RootController extends BaseController {
   RxInt bottombarIndex = 0.obs;
   List screens = [];
 
