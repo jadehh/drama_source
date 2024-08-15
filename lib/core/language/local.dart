@@ -23,6 +23,8 @@ class Local {
 
   //Dialog
   static const String cancel = "取消";
+  static const String confirm = "确认";
+  static const String configHit = "请输入接口…";
 
 
 }

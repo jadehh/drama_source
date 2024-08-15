@@ -35,7 +35,7 @@ class SearchView extends StatelessWidget {
                     print("按下热搜按钮");
                   }
                 },
-                style: TextButtomCustomStyle().lightTextButtonNormalStyle(),
+                style: TextButtonCustomStyle().lightTextButtonNormalStyle(),
                 child: const Text("热搜", textAlign: TextAlign.left),
               ),
             )),

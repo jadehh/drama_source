@@ -1,7 +1,7 @@
 /*
  * @Author: jadehh
  * @Date: 2024-07-11 13:25:34
- * @LastEditTime: 2024-07-30 14:03:58
+ * @LastEditTime: 2024-08-15 19:06:35
  * @LastEditors: jadehh
  * @Description: 
  * @FilePath: \dramasource\lib\routes\app_routes.dart
@@ -26,6 +26,8 @@ abstract class Routes {
   static const DOWNLOAD = _Paths.DOWNLOAD;
   // ignore: constant_identifier_names
   static const DETAIL = _Paths.DETAIL;
+  // ignore: constant_identifier_names
+  static const TEST = _Paths.TEST;
 }
 
 abstract class _Paths {
@@ -42,6 +44,8 @@ abstract class _Paths {
   static const LANGUAGESETTING = '/setting/language';
   // ignore: constant_identifier_names
   static const DOWNLOAD = '/download';
-    // ignore: constant_identifier_names
+  // ignore: constant_identifier_names
   static const DETAIL = '/detail';
+  // ignore: constant_identifier_names
+  static const TEST = '/test';
 }

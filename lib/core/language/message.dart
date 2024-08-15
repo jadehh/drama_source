@@ -26,6 +26,7 @@ class Messages extends Translations {
           Local.about: Local.about,
           //Dialog
           Local.cancel:Local.cancel,
+          Local.confirm:Local.confirm,
 
         },
         'zh_HK': {
@@ -42,6 +43,8 @@ class Messages extends Translations {
           Local.about: "關於",
           //Dialog
           Local.cancel:"取消",
+          Local.confirm:"確認",
+          Local.configHit:"請輸入接口…",
         },
         'en_US': {
           Local.appName: "DramaSource",
@@ -57,6 +60,8 @@ class Messages extends Translations {
           Local.about: "about",
           //Dialog
           Local.cancel:"cancel",
+          Local.confirm:"confirm",
+          Local.configHit:"Please enter the config…",
         },
       };
 }

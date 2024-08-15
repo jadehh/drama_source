@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  path: any
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -54,10 +55,18 @@ dependencies:
   pull_to_refresh: ^2.0.0
   sprintf: ^7.0.0
   flutter_js: ^0.8.1
+  path_provider: ^2.1.4
+  logger: ^2.4.0
+  http: ^1.2.2
+  sqflite: ^2.3.3+1
+  sqflite_common_ffi: ^2.3.3
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -65,6 +74,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  json_serializable: ^6.8.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -79,6 +89,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/js/
     - assets/images/
     - assets/images/wall/
 

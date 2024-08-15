@@ -1,5 +1,5 @@
 /*
- * @File     : text_buttom_custom_style.dart
+ * @File     : text_button_custom_style.dart
  * @Author   : jade
  * @Date     : 2024/08/09 01:02:55
  * @Email    : jadehh@1ive.com
@@ -9,7 +9,7 @@
 
 import 'package:flutter/material.dart';
 
-class TextButtomCustomStyle {
+class TextButtonCustomStyle {
   ButtonStyle lightTextButtonNormalStyle() {
     return ButtonStyle(
       alignment: Alignment.centerLeft,

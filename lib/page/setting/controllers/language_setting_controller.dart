@@ -1,7 +1,7 @@
 /*
  * @Author: jadehh
  * @Date: 2024-07-15 14:59:34
- * @LastEditTime: 2024-08-13 16:53:07
+ * @LastEditTime: 2024-08-15 16:47:23
  * @LastEditors: jadehh
  * @Description: 
  * @FilePath: \dramasource\lib\page\setting\controllers\language_setting_controller.dart
@@ -41,5 +41,8 @@ class LanguageSettingsController extends GetxController {
     SettingController settingController = Get.find<SettingController>();
     settingController.getLanguage();
   }
+
+
+
 }
 

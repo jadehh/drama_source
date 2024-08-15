@@ -10,14 +10,12 @@
 
 
 import 'package:dramasource/core/language/local.dart';
-import 'package:dramasource/core/model/setting.dart';
 import 'package:dramasource/page/setting/controllers/language_setting_controller.dart';
-import 'package:dramasource/page/setting/controllers/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class LanguageSettingDialog extends GetView<LanguageSettingsController> {
 
-   LanguageSettingDialog({super.key});
+   const LanguageSettingDialog({super.key});
   
   @override
   Widget build(BuildContext context) {

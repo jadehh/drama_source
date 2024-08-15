@@ -8,6 +8,7 @@
  */
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class BaseFooterView extends StatelessWidget {
@@ -18,19 +19,19 @@ class BaseFooterView extends StatelessWidget {
     return CustomFooter(builder: (BuildContext context, LoadStatus? mode) { 
           Widget body ;
             if(mode==LoadStatus.idle){
-              body =  const Text("pull up load");
+              body =   Text("pull up load",style: Theme.of(context).textTheme.bodySmall);
             }
             else if(mode==LoadStatus.loading){
-              body =  const CupertinoActivityIndicator();
+              body =  const CupertinoActivityIndicator(color: Colors.white);
             }
             else if(mode == LoadStatus.failed){
-              body = const Text("Load Failed!Click retry!");
+              body =  Text("Load Failed!Click retry!",style: Theme.of(context).textTheme.bodySmall);
             }
             else if(mode == LoadStatus.canLoading){
-              body = const Text("release to load more");
+              body =  Text("release to load more",style: Theme.of(context).textTheme.bodySmall);
             }
             else{
-              body = const Text("No more Data");
+              body =  Text("No more Data",style: Theme.of(context).textTheme.bodySmall);
             }
             return Center(child:body);
          });

@@ -44,6 +44,11 @@ class ButtomView extends GetView<RootController> {
                   child:FocusState.instance.focusWidget(BaseIconButton(Icons.download, (){
                         controller.changeBottomBarIndex(2);
                   }))),
+               Tooltip(
+                  message: "测试",
+                  child:FocusState.instance.focusWidget(BaseIconButton(Icons.textsms, (){
+                        controller.changeBottomBarIndex(3);
+                  }))),
             ],
           ),
         ));

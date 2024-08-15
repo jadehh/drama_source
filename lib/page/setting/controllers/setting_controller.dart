@@ -7,23 +7,31 @@
  * @Desc     :
  */
 
+import 'package:dramasource/api/config/vod_config.dart';
 import 'package:dramasource/core/language/local.dart';
 import 'package:dramasource/core/model/setting.dart';
+import 'package:dramasource/db/bean/config.dart';
 import 'package:dramasource/page/base/controllers/base_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-
-class SettingController extends BaseController with WidgetsBindingObserver  {
-  
+class SettingController extends BaseController with WidgetsBindingObserver {
   final languageStr = Local.followerSystemLanguage.tr.obs;
 
-  
+  final vodUrl = "".obs;
+
+  final liveUrl = "".obs;
+
+  final wallUrl = "".obs;
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     WidgetsBinding.instance.addObserver(this);
     getLanguage();
+    vodUrl.value = await VodConfig.getDesc();
+    // liveUrl.value = LiveConfig.getDesc();
+    // wallUrl.value = WallConfig.getDesc();
   }
 
   @override
@@ -37,7 +45,6 @@ class SettingController extends BaseController with WidgetsBindingObserver  {
     super.didChangeAppLifecycleState(state);
     getLanguage();
   }
-
 
   //获取语言
   void getLanguage() {
@@ -59,8 +66,26 @@ class SettingController extends BaseController with WidgetsBindingObserver  {
         break;
     }
   }
+
+  setConfig(Config config) {
+    if (config.url!.startsWith("file")) {
+    } else {
+      _load(config);
+    }
+  }
+
+  _load(Config config) {
+    switch (config.type) {
+      case 0:
+        VodConfig.load(config);
+        vodUrl.value = config.getDesc();
+        break;
+      case 1:
+        liveUrl.value = config.getDesc();
+        break;
+      case 2:
+        wallUrl.value = config.getDesc();
+        break;
+    }
+  }
 }
-
-
-
-

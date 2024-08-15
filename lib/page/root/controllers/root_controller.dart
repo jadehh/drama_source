@@ -10,6 +10,7 @@ import 'package:dramasource/page/base/controllers/base_controller.dart';
 import 'package:dramasource/page/download/views/download_view.dart';
 import 'package:dramasource/page/setting/views/language_setting_view.dart';
 import 'package:dramasource/page/setting/views/setting_view.dart';
+import 'package:dramasource/page/test/view/test_view.dart';
 import 'package:dramasource/page/vod/views/vod_view.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +23,7 @@ class RootController extends BaseController {
     screens.add(const VodView());
     screens.add(const SettingView());
     screens.add(const DownloadView());
-    screens.add(const LanguageSettingsView());
+    screens.add(const TestView());
     super.onInit();
   }
 

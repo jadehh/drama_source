@@ -1,7 +1,7 @@
 /*
  * @Author: jadehh
  * @Date: 2024-07-11 16:33:55
- * @LastEditTime: 2024-08-13 16:18:17
+ * @LastEditTime: 2024-08-15 16:44:30
  * @LastEditors: jadehh
  * @Description: 
  * @FilePath: \dramasource\lib\page\setting\views\setting_view.dart
@@ -11,6 +11,7 @@ import 'package:dramasource/core/config/wall_config.dart';
 import 'package:dramasource/core/language/local.dart';
 import 'package:dramasource/core/model/setting.dart';
 import 'package:dramasource/page/base/views/base_background_container_view.dart';
+import 'package:dramasource/page/setting/dialog/config_dialog.dart';
 import 'package:dramasource/page/setting/dialog/language_setting_dialog.dart';
 import 'package:dramasource/page/setting/views/setting_app_bar_view.dart';
 import 'package:dramasource/page/setting/controllers/setting_controller.dart';
@@ -37,12 +38,18 @@ class SettingView extends GetView<SettingController> {
                         SettingAppBarView(Local.navSetting.tr),
                         Expanded(
                             child: ListView(children: [
-                          CustomSettingView(Local.navVod.tr, "https://", () {},
-                              () {}, () {}, Icons.history),
-                          CustomSettingView(Local.navLive.tr, "https://", () {},
+                          Obx(()=>CustomSettingView(Local.navVod.tr, controller.vodUrl.value, () {
+                            Get.dialog(const ConfigDialog(type:0));
+                          },
+                              () {}, () {}, Icons.history)),
+                          CustomSettingView(Local.navLive.tr, "https://", () {
+                              Get.dialog(const ConfigDialog(type:1));
+                          },
                               () {}, () {}, Icons.history),
                           CustomSettingView(
-                              Local.wallPaper.tr, "https://", () {}, () {
+                              Local.wallPaper.tr, "https://", () {
+                                Get.dialog(const ConfigDialog(type:2));
+                              }, () {
                             WallConfig.refresh(Setting.getWall() == 4
                                 ? 1
                                 : Setting.getWall() + 1);
@@ -52,7 +59,7 @@ class SettingView extends GetView<SettingController> {
                             // Get.toNamed(Routes.LANGUAGESETTING)?.then((value) {
                             //   controller.getLanguage();
                             // });
-                            Get.dialog( LanguageSettingDialog());
+                            Get.dialog( const LanguageSettingDialog());
                           }),
                           NormalSettingView(
                               Local.about.tr, Setting.getVersion(), () {

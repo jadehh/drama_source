@@ -15,6 +15,7 @@ import 'package:dramasource/page/setting/bindings/language_binding.dart';
 import 'package:dramasource/page/setting/bindings/setting_binding.dart';
 import 'package:dramasource/page/setting/views/language_setting_view.dart';
 import 'package:dramasource/page/setting/views/setting_view.dart';
+import 'package:dramasource/page/test/view/test_view.dart';
 import 'package:dramasource/page/vod/bindings/vod_bindings.dart';
 import 'package:dramasource/page/vod/views/vod_view.dart';
 import 'package:get/get.dart';
@@ -54,11 +55,18 @@ class AppPages {
     ),
      GetPage(
       name: _Paths.DETAIL,
-      transition: Transition.downToUp,
+      transition: Transition.topLevel,
       // preventDuplicates: true,
       page: () =>  const VodDetailView(),
       binding: VodDetailBinding(),
     ),
+    GetPage(
+         name: _Paths.TEST,
+        participatesInRootNavigator: true,
+        transition: Transition.topLevel,
+        // preventDuplicates: true,
+        page: () => const TestView(),
+        ),
   ];
 
   AppPages._();

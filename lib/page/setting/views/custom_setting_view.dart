@@ -1,7 +1,7 @@
 /*
  * @Author: jadehh
  * @Date: 2024-07-16 19:30:30
- * @LastEditTime: 2024-08-09 09:39:47
+ * @LastEditTime: 2024-08-15 19:36:57
  * @LastEditors: jadehh
  * @Description: 
  * @FilePath: \dramasource\lib\page\setting\views\custom_setting_view.dart
@@ -39,7 +39,8 @@ class CustomSettingView extends GetView<NormalSettingController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(name),
-                    Text(text),
+                    const Padding(padding: EdgeInsets.only(left: 20)),
+                    Expanded(child: Text(text,overflow: TextOverflow.ellipsis)),
                   ]),
             ))),
             const Padding(padding: EdgeInsets.only(left: 20)),
