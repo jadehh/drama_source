@@ -9,6 +9,7 @@
  */
 
 
+import 'package:drama_source_app/app/app_style.dart';
 import 'package:drama_source_app/app/constant.dart';
 import 'package:drama_source_app/app/modules/vod/controllers/vod_controller.dart';
 import 'package:drama_source_app/app/modules/vod/views/vod_view.dart';
@@ -51,8 +52,7 @@ class IndexedController extends GetxController {
       }
     } else {
       if (index.value == i) {
-        // EventBus.instance
-        //     .emit<int>(EventBus.kBottomNavigationBarClicked, items[i].index);
+        RefreshEvent().buttom();
       }
     }
 
@@ -62,9 +62,7 @@ class IndexedController extends GetxController {
   @override
   void onInit() {
     Future.delayed(Duration.zero, showFirstRun);
-    items.value = AppSettingsController.instance.homeSort
-        .map((key) => Constant.allHomePages[key]!)
-        .toList();
+    items.value = AppSettingsController.instance.homeSort.map((key) => Constant.allHomePages[key]!).toList();
     setIndex(0);
     super.onInit();
   }
@@ -73,10 +71,10 @@ class IndexedController extends GetxController {
     var settingsController = Get.find<AppSettingsController>();
     if (settingsController.firstRun) {
       settingsController.setNoFirstRun();
-      await Utils.showStatement();
-      Utils.checkUpdate();
+      await Utils.showStatement(AppStyle.edgeInsetsA12);
+      Utils.checkUpdate(AppStyle.edgeInsetsA12,AppStyle.hGap32);
     } else {
-      Utils.checkUpdate();
+      Utils.checkUpdate(AppStyle.edgeInsetsA12,AppStyle.hGap32);
     }
   }
 }

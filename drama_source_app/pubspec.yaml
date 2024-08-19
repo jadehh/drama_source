@@ -41,8 +41,11 @@ dependencies:
   hive_flutter: ^1.1.0
   pull_to_refresh: ^2.0.0
   share_plus: ^10.0.2
+  tab_indicator_styler: ^2.0.0
   window_manager: ^0.4.2
 
+dependency_overrides: 
+  fading_edge_scrollview: ^4.1.1
 
 
 dev_dependencies:
@@ -59,6 +62,15 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo.png"
+  min_sdk_android: 21
+  macos:
+    generate: true
+
+
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -66,8 +78,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  assets: 
+  assets:
+    - assets/js/
     - assets/images/
+    - assets/images/wall/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

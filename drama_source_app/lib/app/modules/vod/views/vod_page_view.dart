@@ -7,8 +7,10 @@
  * @FilePath: \drama_source\drama_source_app\lib\app\modules\vod\views\vod_page_view.dart
  * 
  */
+import 'package:drama_source_app/app/app_style.dart';
 import 'package:drama_source_app/app/modules/vod/controllers/vod_items_controller.dart';
 import 'package:drama_source_app/widgets/base_footer_view.dart';
+import 'package:drama_source_app/widgets/cards/vod_card.dart';
 import 'package:drama_source_core/drama_source_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +37,7 @@ class VodPageView extends StatelessWidget {
             child: MasonryGridView.count(
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
-              padding: AppStyle.edgeInsetsA48,
+              padding: AppStyle.edgeInsetsA24,
               controller: vodItemsController.scrollController,
               itemCount: vodItemsController.items.length,
               itemBuilder: (context, index) {
@@ -49,7 +51,7 @@ class VodPageView extends StatelessWidget {
                     onTap: () {
                     },
                   );       
-              }, crossAxisCount: 5,
+              }, crossAxisCount: 3,
             ));
   }
 

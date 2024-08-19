@@ -26,7 +26,7 @@ class VodView extends GetView<VodController> {
           height: 60.0, // 设置高度
           child: AppBarView(),
         ),
-        Expanded(child: VodTabView(10)),
+        Expanded(child: VodTabView(20)),
       ])),
     );
   }

@@ -7,8 +7,8 @@
  * @FilePath: \drama_source\drama_source_core\lib\src\controller\app_setting_controller.dart
  * 
  */
-import 'package:drama_source_core/src/log.dart';
-import 'package:drama_source_core/src/model/setting.dart';
+import 'package:drama_source_core/drama_source_core.dart';
+import 'package:drama_source_core/src/model/prefers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,8 +38,27 @@ class AppSettingsController extends GetxController {
     if (logEnable.value) {
       Log.initWriter();
     }
-
     super.onInit();
+  }
+
+  initHomeSort(Map<String, dynamic> allHomePages){
+    var sort = Prefers.instance
+        .getValue(
+          Prefers.kHomeSort,
+         allHomePages.keys.join(","),
+        )
+        .split(",");
+    //如果数量与allSites的数量不一致，将缺失的添加上
+    if (sort.length != allHomePages.length) {
+      var keys = allHomePages.keys.toList();
+      for (var i = 0; i < keys.length; i++) {
+        if (!sort.contains(keys[i])) {
+          sort.add(keys[i]);
+        }
+      }
+    }
+
+    homeSort.value = sort;
   }
 
   var isDynamic = false.obs;

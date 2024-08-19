@@ -9,14 +9,16 @@
  */
 
 import 'package:drama_source_core/src/event/event.dart';
+import 'package:drama_source_core/src/model/prefers.dart';
 
 class RefreshEvent {
   
   void wall() {
-    EventBus.instance.emit(Type.wall,0);
+    EventBus.instance.emit(Prefers.kWall,0);
+  }
+
+  void buttom(){
+    EventBus.instance.emit(Prefers.kBottomNavigationBarClicked,0);
   }
 }
 
-class Type{
-  static const wall = "wall";
-}

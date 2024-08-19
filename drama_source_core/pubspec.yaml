@@ -60,49 +60,16 @@ dependencies:
   device_info_plus: ^10.1.2 #设备信息
   udp: ^5.0.3 #UDP
 
-
-  # 视频播放
-  media_kit:
-    git:
-      url: https://github.com/media-kit/media-kit.git
-      ref: main
-      path: ./media_kit
-  media_kit_video:
-    git:
-      url: https://github.com/media-kit/media-kit.git
-      ref: main
-      path: ./media_kit_video
-  media_kit_libs_video:
-    git:
-      url: https://github.com/media-kit/media-kit.git
-      ref: main
-      path: ./libs/universal/media_kit_libs_video
-
+  #视频处理
+  media_kit: ^1.1.10                             # Primary package.
+  media_kit_video: ^1.2.4                        # For video rendering.
+  media_kit_libs_video: ^1.0.4                   # Native video dependencies.
+  sqflite_common_ffi: ^2.3.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-dependency_overrides: 
-  fading_edge_scrollview: ^4.1.1
-  media_kit:
-    git:
-      url: https://github.com/media-kit/media-kit.git
-      ref: main
-      path: ./media_kit
-  media_kit_video:
-    git:
-      url: https://github.com/media-kit/media-kit.git
-      ref: main
-      path: ./media_kit_video
-  media_kit_libs_video:
-    git:
-      url: https://github.com/media-kit/media-kit.git
-      ref: main
-      path: ./libs/universal/media_kit_libs_video
-  media_kit_native_event_loop:
-    git:
-      url: https://github.com/media-kit/media-kit.git
-      ref: main
-      path: ./media_kit_native_event_loop
+
+
 
 dev_dependencies:
   lints: ^4.0.0

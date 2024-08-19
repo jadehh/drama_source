@@ -8,7 +8,9 @@
  */
 
 
+import 'package:drama_source_app/app/app_style.dart';
 import 'package:drama_source_app/app/modules/vod/views/vod_page_view.dart';
+import 'package:drama_source_app/widgets/button/highlight_button.dart';
 import 'package:drama_source_core/drama_source_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,19 +29,16 @@ class VodTabController extends GetxController
       AppFocusNode appFocusNode = AppFocusNode();
       
       _focusList.add(appFocusNode);
-      tabs.add(AppStyle.hGap32);
       tabs.add(
-        Obx(
+           Obx(
           () => HighlightButton(
             focusNode:appFocusNode,
-            text: "Vod $i",
+            text: "V$i",
             selected: tabIndex.value == i,
             onTap: () {
               tabController.animateTo(i);
             },
-          ),
-        ),
-      );
+          )));
       items.add(VodPageView(tabControolerKey: UniqueKey()));
     }
   }

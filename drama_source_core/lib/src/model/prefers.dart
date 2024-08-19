@@ -36,6 +36,14 @@ class Prefers extends GetxService {
   static const String kBuildName = "BuildName";
 
 
+  /// 首页排序
+  static const String kHomeSort = "HomeSort";
+
+
+  /// 导航栏
+  static const String kBottomNavigationBarClicked = "BottomNavigationBarClicked";
+
+
   /// 显示模式
   /// * [0] 跟随系统
   /// * [1] 浅色模式

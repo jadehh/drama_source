@@ -25,7 +25,6 @@ class AppScaffold extends StatelessWidget {
                   image: AssetImage(FileUtil.getWall(Setting.getWall())),
                   fit: BoxFit.cover),
             ),
-          
           ),
           Positioned.fill(child: child),
         ],

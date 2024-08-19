@@ -11,7 +11,6 @@
 import 'dart:io';
 
 import 'package:drama_source_core/drama_source_core.dart';
-import 'package:drama_source_core/src/app/app_style.dart';
 import 'package:drama_source_core/src/requests/common_request.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
@@ -29,10 +28,11 @@ class Utils {
   static DateFormat timeFormat = DateFormat("HH:mm:ss");
 
 
-  static Future showStatement() async {
+  static Future showStatement(EdgeInsetsGeometry padding) async {
     var text = await rootBundle.loadString("assets/statement.txt");
 
     var result = await showAlertDialog(
+      padding,
       text,
       selectable: true,
       title: "免责声明",
@@ -45,7 +45,7 @@ class Utils {
   }
 
 
-  static void checkUpdate({bool showMsg = false}) async {
+  static void checkUpdate(EdgeInsetsGeometry padding,Widget padWidget,{bool showMsg = false}) async {
     try {
       int currentVer = Utils.stringToInt(packageInfo.version);
       CommonRequest request = CommonRequest();
@@ -62,7 +62,7 @@ class Utils {
               versionInfo.versionDesc,
               style: const TextStyle(fontSize: 14, height: 1.4),
             ),
-            actionsPadding: AppStyle.edgeInsetsH12,
+            actionsPadding: padding,
             actions: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,7 +75,7 @@ class Utils {
                       child: const Text("取消"),
                     ),
                   ),
-                  AppStyle.hGap12,
+                  padWidget,
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -132,6 +132,7 @@ class Utils {
 
 
   static Future<bool> showAlertDialog(
+    EdgeInsetsGeometry padding,
     String content, {
     String title = '',
     String confirm = '',
@@ -148,7 +149,7 @@ class Utils {
           ),
           child: SingleChildScrollView(
             child: Padding(
-              padding: AppStyle.edgeInsetsV12,
+              padding: padding,
               child: selectable ? SelectableText(content) : Text(content),
             ),
           ),

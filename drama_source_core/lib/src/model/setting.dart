@@ -24,7 +24,7 @@ class Setting {
 
   // 获取主题壁纸
   static int getWall() {
-    return Prefers.instance.getValue(Prefers.kWall,0);
+    return Prefers.instance.getValue(Prefers.kWall,5);
   }
 
   // 设置主题
