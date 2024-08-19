@@ -1,7 +1,52 @@
 {
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": []
+    "configurations": [
+    
+        {
+            "name": "drama_source_app",
+            "cwd": "drama_source_app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "drama_source_app (profile mode)",
+            "cwd": "drama_source_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "drama_source_app (release mode)",
+            "cwd": "drama_source_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "drama_source_core",
+            "cwd": "drama_source_core",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "drama_source_tv_app",
+            "cwd": "drama_source_tv_app",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "drama_source_tv_app (profile mode)",
+            "cwd": "drama_source_tv_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "drama_source_tv_app (release mode)",
+            "cwd": "drama_source_tv_app",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
 }

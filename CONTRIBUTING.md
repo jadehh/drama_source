@@ -6,6 +6,7 @@
 * 自定义一些常用的主题和Widget
 * 支持Config数据录的配置
 * 完成点播配置的基本功能
+* 按照dart规范，重新归档项目,区分TV端和APP端，分离核心业务层
 
 <details onclose>
 <summary>查看更多更新日志</summary>

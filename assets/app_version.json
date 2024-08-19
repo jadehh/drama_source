@@ -1,0 +1,7 @@
+{
+    "version": "1.0.0",
+    "version_num": 10000,
+    "version_desc": "- 按照标准的dart格式，重新归档项目",
+    "prerelease":false,
+    "download_url": ""
+}
