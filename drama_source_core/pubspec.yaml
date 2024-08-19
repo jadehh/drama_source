@@ -1,5 +1,4 @@
 name: drama_source_core
-version: 1.0.1
 description: "追源核心库"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -29,10 +28,84 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies: 
-  logger: ^2.4.0
+
+  # 图标
+  remixicon: ^1.2.0
+
+  # 框架、工具
+  get: ^4.6.6 #状态管理、路由管理、国际化
+  dio: ^5.6.0 #网络请求
+  hive: 2.2.3 #持久化存储
+  hive_flutter: 1.1.0 #持久化存储
+  logger: ^2.4.0 #日志
+  flutter_screenutil: ^5.9.3  #UI适配
+  intl: ^0.19.0 #国际化
+  uuid: ^4.4.2 #UUID
+  
+  #网络想关
+  network_info_plus: ^6.0.1
+  shelf_router: ^1.1.4
+
+
+  #widget
+  marquee: ^2.2.3 #跑马灯
+  flutter_smart_dialog: ^4.9.8 #各种弹窗 Toast/Dialog/Popup
+  extended_image: ^8.2.1 #拓展Image,支持缓存
+
+  
+  #系统交互
+  package_info_plus: ^8.0.2 #包信息
+  url_launcher: ^6.3.0 #打开链接
+  path_provider: ^2.1.4 #常用路径
+  device_info_plus: ^10.1.2 #设备信息
+  udp: ^5.0.3 #UDP
+
+
+  # 视频播放
+  media_kit:
+    git:
+      url: https://github.com/media-kit/media-kit.git
+      ref: main
+      path: ./media_kit
+  media_kit_video:
+    git:
+      url: https://github.com/media-kit/media-kit.git
+      ref: main
+      path: ./media_kit_video
+  media_kit_libs_video:
+    git:
+      url: https://github.com/media-kit/media-kit.git
+      ref: main
+      path: ./libs/universal/media_kit_libs_video
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+dependency_overrides: 
+  fading_edge_scrollview: ^4.1.1
+  media_kit:
+    git:
+      url: https://github.com/media-kit/media-kit.git
+      ref: main
+      path: ./media_kit
+  media_kit_video:
+    git:
+      url: https://github.com/media-kit/media-kit.git
+      ref: main
+      path: ./media_kit_video
+  media_kit_libs_video:
+    git:
+      url: https://github.com/media-kit/media-kit.git
+      ref: main
+      path: ./libs/universal/media_kit_libs_video
+  media_kit_native_event_loop:
+    git:
+      url: https://github.com/media-kit/media-kit.git
+      ref: main
+      path: ./media_kit_native_event_loop
 
 dev_dependencies:
-  lints: ^2.0.0
+  lints: ^4.0.0
   test: ^1.21.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -52,6 +125,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:
