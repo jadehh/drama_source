@@ -1,29 +1,17 @@
 /*
  * @Author: jadehh
  * @Date: 2024-08-19 16:03:37
- * @LastEditTime: 2024-08-19 16:06:07
+ * @LastEditTime: 2024-08-22 14:07:57
  * @LastEditors: jadehh
  * @Description: 
  * @FilePath: \drama_source\drama_source_core\lib\src\service\sync_service.dart
  * 
  */
-/*
- * @File     : sync_service.dart
- * @Author   : jade
- * @Date     : 2024/08/19 04:03:37
- * @Email    : jadehh@1ive.com
- * @Software : Samples
- * @Desc     :
- */
-
-
-
-
-
-
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cat_vod/cat_vod.dart';
+import 'package:drama_source_log/drama_source_log.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:drama_source_core/drama_source_core.dart';
@@ -36,6 +24,7 @@ import 'package:uuid/uuid.dart';
 
 class SyncService extends GetxService {
   static SyncService get instance => Get.find<SyncService>();
+  static SyncService get() {return instance;}
 
   UDP? udp;
   RxList<SyncClinet> scanClients = <SyncClinet>[].obs;
@@ -238,17 +227,17 @@ class SyncService extends GetxService {
   }
 
   /// 发送自己的信息
-  Future<shelf.Response> _infoRequest(shelf.Request request) async {
-    var name = await getDeviceName();
-    return toJsonResponse({
-      "id": deviceId,
-      'type': Platform.operatingSystem,
-      'name': name,
-      'version': Utils.packageInfo.version,
-      'address': ipAddress.value,
-      'port': httpPort,
-    });
-  }
+  // Future<shelf.Response> _infoRequest(shelf.Request request) async {
+  //   var name = await getDeviceName();
+  //   return toJsonResponse({
+  //     "id": deviceId,
+  //     'type': Platform.operatingSystem,
+  //     'name': name,
+  //     'version': Utils.packageInfo.version,
+  //     'address': ipAddress.value,
+  //     'port': httpPort,
+  //   });
+  // }
 
   
   shelf.Response toJsonResponse(Map<String, dynamic> data) {
@@ -267,6 +256,14 @@ class SyncService extends GetxService {
     udp?.close();
     server?.close(force: true);
     super.onClose();
+  }
+
+   Future<String> getAddressByLocal(bool local) async{
+    return "http://" + (local ? "127.0.0.1" : await Util.getIp()) + ":" + httpPort.toString();
+  }
+
+   Future<String> getAddressByPath(String path) async {
+    return await getAddressByLocal(false) + "/" + path;
   }
 }
 

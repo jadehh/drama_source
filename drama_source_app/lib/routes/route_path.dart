@@ -3,6 +3,9 @@ class RoutePath {
   /// 首页
   static const kIndex = "/index";
 
+  /// 详情界面
+  static const kDetail = "/detail";
+
   /// 搜索
   static const kSearch = "/search";
 

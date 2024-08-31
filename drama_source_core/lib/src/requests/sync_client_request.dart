@@ -8,14 +8,16 @@
  * 
  */
 
+
+
 import 'package:drama_source_core/src/model/sync_client_info_model.dart';
-import 'package:drama_source_core/src/requests/http_client.dart';
 import 'package:drama_source_core/src/service/sync_service.dart';
+import 'package:ok_http/ok_http.dart';
 
 class SyncClientRequest {
   Future<SyncClientInfoModel> getClientInfo(SyncClinet client) async {
     var url = "http://${client.address}:${client.port}/info";
-    var data = await HttpClient.instance.getJson(url);
+    var data = await OkHttp.instance.getJson(url);
 
     return SyncClientInfoModel.fromJson(data);
   }
@@ -26,7 +28,7 @@ class SyncClientRequest {
     bool overlay = false,
   }) async {
     var url = "http://${client.address}:${client.port}/sync/follow";
-    var data = await HttpClient.instance.postJson(
+    var data = await OkHttp.instance.postJson(
       url,
       data: body,
       queryParameters: {
@@ -47,7 +49,7 @@ class SyncClientRequest {
     bool overlay = false,
   }) async {
     var url = "http://${client.address}:${client.port}/sync/history";
-    var data = await HttpClient.instance.postJson(
+    var data = await OkHttp.instance.postJson(
       url,
       data: body,
       queryParameters: {
@@ -68,7 +70,7 @@ class SyncClientRequest {
     bool overlay = false,
   }) async {
     var url = "http://${client.address}:${client.port}/sync/blocked_word";
-    var data = await HttpClient.instance.postJson(
+    var data = await OkHttp.instance.postJson(
       url,
       data: body,
       queryParameters: {
@@ -85,7 +87,7 @@ class SyncClientRequest {
 
   Future<bool> syncBiliAccount(SyncClinet client, String cookie) async {
     var url = "http://${client.address}:${client.port}/sync/account/bilibili";
-    var data = await HttpClient.instance.postJson(
+    var data = await OkHttp.instance.postJson(
       url,
       data: {
         "cookie": cookie,

@@ -44,3 +44,8 @@ app.*.map.json
 /pubspec.lock
 /.metadata
 /analysis_options.yaml
+
+
+/pubspec.lock
+/.metadata
+/analysis_options.yaml

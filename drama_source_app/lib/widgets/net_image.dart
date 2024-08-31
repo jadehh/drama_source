@@ -1,14 +1,14 @@
 /*
- * @File     : net_image.dart
- * @Author   : jade
- * @Date     : 2024/08/19 04:45:12
- * @Email    : jadehh@1ive.com
- * @Software : Samples
- * @Desc     :
+ * @Author: jadehh
+ * @Date: 2024-08-19 23:40:38
+ * @LastEditTime: 2024-08-20 10:33:31
+ * @LastEditors: jadehh
+ * @Description: 
+ * @FilePath: \drama_source\drama_source_app\lib\widgets\net_image.dart
+ * 
  */
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NetImage extends StatelessWidget {
   final String picUrl;
@@ -16,18 +16,24 @@ class NetImage extends StatelessWidget {
   final double? height;
   final BoxFit? fit;
   final double borderRadius;
-  final int? cacheWidth;
   const NetImage(this.picUrl,
       {this.width,
       this.height,
       this.fit = BoxFit.cover,
       this.borderRadius = 0,
-      this.cacheWidth,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (picUrl.isEmpty) {
+      return Image.asset(
+        'assets/images/res/ic_img_error.png',
+        width: width,
+        height: height,
+        fit: fit,
+      );
+    }
     var pic = picUrl;
     if (pic.startsWith("//")) {
       pic = 'https:$pic';
@@ -39,15 +45,18 @@ class NetImage extends StatelessWidget {
         fit: fit,
         height: height,
         width: width,
-        cacheWidth: cacheWidth,
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(borderRadius),
         loadStateChanged: (e) {
           if (e.extendedImageLoadState == LoadState.loading) {
-            return const SizedBox();
+            return const Icon(
+              Icons.image,
+              color: Colors.grey,
+              size: 24,
+            );
           }
           if (e.extendedImageLoadState == LoadState.failed) {
-            return Icon(
+            return const Icon(
               Icons.broken_image,
               color: Colors.grey,
               size: 24,

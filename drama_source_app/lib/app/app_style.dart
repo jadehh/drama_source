@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-
-
 class AppColors {
   static ColorScheme lightColorScheme = ColorScheme.fromSeed(
     // primarySwatch: Colors.blue,
@@ -20,6 +18,13 @@ class AppColors {
 
 class AppStyle {
   static ThemeData lightTheme = ThemeData(
+    textTheme: textNormalTheme(),
+    checkboxTheme: normalCheckBoxTheme(),
+    iconButtonTheme: IconButtonThemeData(style: lightIconButtonNormalStyle()),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: lightOutLineButtonNormalStyle(),
+    ),
+    tabBarTheme: const TabBarTheme(dividerColor: Colors.transparent),
     colorScheme: AppColors.lightColorScheme,
     useMaterial3: true,
     visualDensity: VisualDensity.standard,
@@ -162,7 +167,6 @@ class AppStyle {
   static const edgeInsetsR20 = EdgeInsets.only(right: 20);
   static const edgeInsetsR24 = EdgeInsets.only(right: 24);
 
-
   static const edgeInsetsL1 = EdgeInsets.only(left: 1);
 
   static const edgeInsetsL4 = EdgeInsets.only(left: 4);
@@ -191,7 +195,6 @@ class AppStyle {
 
   static const colorBlack33 = Color(0xff333333);
 
-
   /// 顶部状态栏的高度
   static double get statusBarHeight => MediaQuery.of(Get.context!).padding.top;
 
@@ -199,7 +202,7 @@ class AppStyle {
   static double get bottomBarHeight =>
       MediaQuery.of(Get.context!).padding.bottom;
 
- static TextStyle get titleStyleWhite => TextStyle(
+  static TextStyle get titleStyleWhite => TextStyle(
         color: Colors.white,
         fontSize: 40,
       );
@@ -241,4 +244,76 @@ class AppStyle {
         endIndent: 16,
         color: Colors.grey.withOpacity(.1),
       );
+
+  static ButtonStyle lightOutLineButtonNormalStyle() {
+    return ButtonStyle(
+      side: WidgetStateProperty.all(
+        BorderSide(color: Colors.black.withOpacity(0.1)), // 设置边框颜色为蓝色
+      ),
+      minimumSize: WidgetStateProperty.all(
+        const Size(40, 60), // 设置按钮的最小宽度和高度
+      ),
+      overlayColor:
+          WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+        if (states.contains(WidgetState.focused) ||
+            states.contains(WidgetState.pressed)) {
+          return Colors.blue.withOpacity(0.5); // 选中状态下的颜色
+        }
+        return null;
+      }),
+      backgroundColor:
+          WidgetStateProperty.all<Color>(Colors.black.withOpacity(0.1)),
+    );
+  }
+
+  static ButtonStyle lightSettingOutlineButtonStyle() {
+    return ButtonStyle(
+      padding: WidgetStateProperty.all(
+        const EdgeInsets.fromLTRB(16, 0, 16, 0),
+      ),
+      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+      textStyle: WidgetStateProperty.all(
+        const TextStyle(fontSize: 16),
+      ),
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+    );
+  }
+
+  static CheckboxThemeData normalCheckBoxTheme() {
+    return const CheckboxThemeData(
+       shape: CircleBorder(),
+    );
+  }
+  static   ButtonStyle lightIconButtonNormalStyle() {
+    return ButtonStyle(overlayColor:
+        WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.focused) || states.contains(WidgetState.pressed)) {
+        return Colors.blue.withOpacity(0.5); // 选中状态下的颜色
+      }
+      return null;
+    }));
+  }
+
+  static  TextTheme textNormalTheme() {
+    return const TextTheme(
+    bodyMedium: TextStyle(
+      // fontFamily: 'Alima ma FangYuanTi VF',
+      color: Colors.white,
+    ),
+    bodySmall: TextStyle(
+      // fontFamily: 'Alima ma FangYuanTi VF',
+      color: Colors.white,
+    ),
+    labelSmall: TextStyle(
+      color: Colors.black,
+    ),
+    titleLarge: TextStyle(
+      fontWeight: FontWeight.bold
+    ),
+  );
+  }
 }

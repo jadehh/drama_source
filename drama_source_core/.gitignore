@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /pubspec.lock
+/.metadata
+/analysis_options.yaml
+/lib/src/api/bean/*.g.dart
+

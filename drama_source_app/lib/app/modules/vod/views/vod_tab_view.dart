@@ -11,7 +11,6 @@ import 'package:drama_source_app/app/app_style.dart';
 import 'package:drama_source_app/app/modules/vod/controllers/vod_tab_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class VodTabView extends GetView<VodTabController> {
   final int pageCount;

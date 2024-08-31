@@ -7,16 +7,16 @@
  * @Desc     :
  */
 
+import 'package:drama_source_core/drama_source_core.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 
 class DBService extends GetxService {
   static DBService get instance => Get.find<DBService>();
-
+  late Box<Config> configBox;
 
   Future init() async {
-
+    configBox = await Hive.openBox("Config");
   }
-
-
 }

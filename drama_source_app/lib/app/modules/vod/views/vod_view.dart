@@ -19,15 +19,43 @@ class VodView extends GetView<VodController> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      child: Container(
-          child: const Column(children: [
-        SizedBox(
-          height: 60.0, // 设置高度
-          child: AppBarView(),
+    return Stack(
+      children: [
+        Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+          const SizedBox(
+            height: 60.0, // 设置高度
+            child: AppBarView(),
+          ),
+          Obx( ()=> Visibility(
+              child: Expanded(
+                  child: Center(
+                      child: IconButton(
+                          onPressed: () {
+                            controller.progressVisible.value = ! controller.progressVisible.value;
+                            controller.retryVisible.value = !controller.retryVisible.value ;
+                          },
+                          icon: const Icon(
+                            Icons.refresh,
+                            size: 56,
+                            color: Colors.white,
+                          )))),
+              visible: controller.retryVisible.value)),
+          Obx(()=>Visibility(child: Expanded(child: Center(child: CircularProgressIndicator(color: Colors.white,))),visible: controller.progressVisible.value,)),
+          // const Expanded(child: VodTabView(20)),
+        ]),
+        Positioned(
+          right: 16.0,
+          bottom: 16.0,
+          child: FloatingActionButton(
+            backgroundColor: Colors.blue,
+            onPressed: () async{
+              await controller.homeContent();
+              controller.progressVisible.value = ! controller.progressVisible.value;
+            },
+            child: Icon(Icons.link,color: Colors.white,),
+          ),
         ),
-        Expanded(child: VodTabView(20)),
-      ])),
+      ],
     );
   }
 }

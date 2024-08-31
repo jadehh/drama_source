@@ -1,14 +1,18 @@
 /*
  * @Author: jadehh
  * @Date: 2024-08-19 14:16:24
- * @LastEditTime: 2024-08-19 15:03:44
+ * @LastEditTime: 2024-08-20 14:07:40
  * @LastEditors: jadehh
  * @Description: 
- * @FilePath: \drama_source\drama_source_core\lib\src\controller\app_setting_controller.dart
+ * @FilePath: \drama_source\drama_source_core\lib\src\app\controller\app_setting_controller.dart
  * 
  */
+import 'dart:async';
+import 'dart:io';
+
+import 'package:cat_vod/cat_vod.dart';
 import 'package:drama_source_core/drama_source_core.dart';
-import 'package:drama_source_core/src/model/prefers.dart';
+import 'package:drama_source_log/drama_source_log.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,24 +34,30 @@ class AppSettingsController extends GetxController {
   @override
   void onInit() {
 
+    super.onInit();
+    
+    EventBus.instance.listen(RefreshEvent.kRefresh, (index) {
+        switch (index) {
+          case RefreshType.WALL:
+            refreshWall();
+        }
+      },
+    );
+    
     themeMode.value = Setting.getTheme();
-    firstRun = Setting.getFirstRun(true); 
+    firstRun = Setting.getFirstRun();
     scaleMode.value = Setting.getScaleModel();
     logEnable.value = Setting.getLogEnable();
 
     if (logEnable.value) {
-      Log.initWriter();
+      Log.initWriter(Utils.packageInfo.version,Utils.packageInfo.buildNumber);
     }
-    super.onInit();
   }
+  
+  
 
   initHomeSort(Map<String, dynamic> allHomePages){
-    var sort = Prefers.instance
-        .getValue(
-          Prefers.kHomeSort,
-         allHomePages.keys.join(","),
-        )
-        .split(",");
+    var sort = Prefers.getString(Prefers.kHomeSort, defaultValue: allHomePages.keys.join(",")).split(",");
     //如果数量与allSites的数量不一致，将缺失的添加上
     if (sort.length != allHomePages.length) {
       var keys = allHomePages.keys.toList();
@@ -73,8 +83,8 @@ class AppSettingsController extends GetxController {
 
 
 
-  void setNoFirstRun() {
-    Setting.setFirstRun();
+  Future setNoFirstRun() async {
+    await Setting.putFirstRun();
   }
 
   void changeTheme() {
@@ -117,10 +127,27 @@ class AppSettingsController extends GetxController {
   void setTheme(int i) {
     themeMode.value = i;
     var mode = ThemeMode.values[i];
-    Setting.setTheme(i);
+    Prefers.put("theme", mode);
     Get.changeThemeMode(mode);
   }
+  refreshWall(){
+    update(["wall"]);
+    Log.d("wall path:${FileUtil.getWall(Setting.getWall())}");
+  }
 
+  ImageProvider refreshImage()  {
+    if (Setting.getWall() == 0){
+      final file = File(FileUtil.getWall(Setting.getWall()));
+      if (file.existsSync()){
+        return MemoryImage(file.readAsBytesSync());
+      }else{
+        final file = File(FileUtil.getWall(1));
+        return MemoryImage(file.readAsBytesSync());
+      }
+    }else{
+      return AssetImage(FileUtil.getWall(Setting.getWall()));
+    }
+  }
 }
 
 

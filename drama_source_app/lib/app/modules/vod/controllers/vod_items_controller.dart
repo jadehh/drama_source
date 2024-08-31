@@ -8,30 +8,24 @@
  */
 
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:sprintf/sprintf.dart';
 
 class VodItemsController extends GetxController{
    late bool _isLoading;
   late int _currentItemCount;
   late List<String> items;
   late RefreshController refreshController;
-  late ScrollController scrollController;
   VodItemsController() {
     _currentItemCount = 50;
     _isLoading = false;
     items = List.generate(_currentItemCount, (i) => "Item ${i + 1}");
     refreshController  = RefreshController(initialRefresh: false);
-    scrollController = ScrollController();
   }
 
   @override
   void onInit() {
     super.onInit();
-    scrollController.addListener(_onScroll);
   }
 
   Future<void> onRefresh() async {
@@ -53,19 +47,6 @@ class VodItemsController extends GetxController{
     }
   }
 
-  void _onScroll() {
-    if (kDebugMode) {
-      print(sprintf('position %s, max postion %s', [scrollController.position.pixels.toInt(),scrollController.position.maxScrollExtent.toInt()]));
-      print(sprintf ("score mean height %s",[scrollController.position.maxScrollExtent.toInt()-scrollController.position.pixels.toInt()]));
-    }
-    if (scrollController.position.maxScrollExtent.toInt()-scrollController.position.pixels.toInt() == 80 && !_isLoading) {
-      if (kDebugMode) {
-        print("加载更多");
-      }
-      refreshController.requestLoading();
-      _isLoading = false;
-    }
-  }
 }
 
 

@@ -8,6 +8,8 @@
 * 完成点播配置的基本功能
 * 按照dart规范，重新归档项目,区分TV端和APP端，分离核心业务层
 * 格式化代码
+* 添加Log和CatVod模块
+* 分离HttpClient模块
 <details onclose>
 <summary>查看更多更新日志</summary>
 

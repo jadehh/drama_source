@@ -10,7 +10,7 @@
 
 import 'dart:async';
 
-import 'package:drama_source_core/drama_source_core.dart';
+import 'package:drama_source_log/drama_source_log.dart';
 
 
 /// 全局事件

@@ -7,6 +7,7 @@
  * @Desc     :
  */
 
+import 'package:drama_source_app/app/app_style.dart';
 import 'package:flutter/material.dart';
 
 class BaseImageIconButton extends StatelessWidget {
@@ -17,6 +18,7 @@ class BaseImageIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
+      style: AppStyle.lightSettingOutlineButtonStyle(),
       onPressed: onPressed,
       child: Icon(
         size: 32,

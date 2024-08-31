@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:drama_source_core/src/model/version_model.dart';
-import 'package:drama_source_core/src/requests/http_client.dart';
+import 'package:ok_http/requests/ok_http.dart';
+
 
 
 /// 通用的请求
@@ -16,7 +17,7 @@ class CommonRequest {
 
   /// 检查更新
   Future<VersionModel> checkUpdateGitMirror() async {
-    var result = await HttpClient.instance.getJson(
+    var result = await OkHttp.instance.getJson(
       "https://raw.gitmirror.com/xiaoyaocz/dart_simple_live/master/assets/app_version.json",
       queryParameters: {
         "ts": DateTime.now().millisecondsSinceEpoch,
@@ -30,7 +31,7 @@ class CommonRequest {
 
   /// 检查更新
   Future<VersionModel> checkUpdateJsDelivr() async {
-    var result = await HttpClient.instance.getJson(
+    var result = await OkHttp.instance.getJson(
       "https://cdn.jsdelivr.net/gh/xiaoyaocz/dart_simple_live@master/assets/app_version.json",
       queryParameters: {
         "ts": DateTime.now().millisecondsSinceEpoch,

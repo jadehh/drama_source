@@ -1,7 +1,7 @@
 /*
  * @Author: jadehh
  * @Date: 2024-08-19 11:11:06
- * @LastEditTime: 2024-08-19 15:57:37
+ * @LastEditTime: 2024-08-20 10:03:51
  * @LastEditors: jadehh
  * @Description: 
  * @FilePath: \drama_source\drama_source_core\lib\src\utils\utils.dart
@@ -10,8 +10,8 @@
 
 import 'dart:io';
 
-import 'package:drama_source_core/drama_source_core.dart';
 import 'package:drama_source_core/src/requests/common_request.dart';
+import 'package:drama_source_log/drama_source_log.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import 'package:get/get.dart';
@@ -24,8 +24,18 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 class Utils {
   static late PackageInfo packageInfo;
+  
 
   static DateFormat timeFormat = DateFormat("HH:mm:ss");
+
+  // 根据屏幕宽度自使用大小
+  static int calculateColumnCount(BuildContext context,double width) {
+    // 获取屏幕宽度
+    double sceenWidth = MediaQuery.of(context).size.width;
+    // 计算列数
+    int columns = (sceenWidth / width).floor(); // 假设每个Item的宽度为150
+    return columns > 0 ? columns : 1; // 至少有一列
+  }
 
 
   static Future showStatement(EdgeInsetsGeometry padding) async {

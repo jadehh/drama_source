@@ -1,7 +1,7 @@
 /*
  * @Author: jadehh
  * @Date: 2024-08-19 15:11:11
- * @LastEditTime: 2024-08-19 16:07:34
+ * @LastEditTime: 2024-08-20 17:30:51
  * @LastEditors: jadehh
  * @Description: 
  * @FilePath: \drama_source\drama_source_app\lib\app\modules\other\debug_log_page.dart
@@ -10,7 +10,7 @@
 import 'dart:io';
 
 import 'package:drama_source_app/app/app_style.dart';
-import 'package:drama_source_core/drama_source_core.dart';
+import 'package:drama_source_log/drama_source_log.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
