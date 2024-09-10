@@ -37,6 +37,10 @@ export "src/api/bean/config.dart";
 export 'src/api/bean/rule.dart';
 export 'src/api/bean/ext.dart';
 export 'src/api/bean/site.dart';
+export 'src/api/bean/result.dart';
+export 'src/api/bean/k_class.dart';
+export 'src/api/bean/vod.dart';
+
 export 'src/model/site_view_model.dart';
 
 class DramaSourceCore {

@@ -8,6 +8,7 @@
  * 
  */
 
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:cat_vod/cat_vod.dart';
@@ -245,7 +246,7 @@ class Site {
   Site trans() {
     if (Trans.pass()) return this;
     List<String> categories = [];
-    for (String cate in getCategories()) categories.add(Trans.s2t(cate));
+    for (String cate in getCategories()) categories.add(Trans.s2t(text: cate));
     setCategories(categories);
     return this;
   }
@@ -274,5 +275,5 @@ class Site {
 }
 
 String extToJson(Map<String,dynamic> ext){
-  return ext.toString();
+  return jsonEncode(ext);
 }

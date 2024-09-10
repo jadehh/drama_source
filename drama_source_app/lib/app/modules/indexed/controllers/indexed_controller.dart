@@ -12,6 +12,8 @@ import 'dart:io';
 
 import 'package:drama_source_app/app/app_style.dart';
 import 'package:drama_source_app/app/constant.dart';
+import 'package:drama_source_app/app/modules/download/controllers/download_controller.dart';
+import 'package:drama_source_app/app/modules/download/views/download_view.dart';
 import 'package:drama_source_app/app/modules/setting/controllers/setting_controller.dart';
 import 'package:drama_source_app/app/modules/setting/views/setting_view.dart';
 import 'package:drama_source_app/app/modules/vod/controllers/vod_controller.dart';
@@ -48,9 +50,10 @@ class IndexedController extends GetxController {
           Get.put(SettingController());
           pages[i] = const SettingView();
           break;
-        // case 3:
-        //   pages[i] = const MinePage();
-        //   break;
+        case 3:
+          Get.put(DownloadController());
+          pages[i] = const DownloadView();
+          break;
         default:
       }
     } else {

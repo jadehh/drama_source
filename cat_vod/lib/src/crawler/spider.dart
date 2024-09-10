@@ -13,19 +13,17 @@ import 'dart:collection';
 
 abstract class Spider {
 
-  Future <void> initEngine() async {
-
+  Future initEngine() async {
   }
 
-  Future<void> init(String ext) async {
-    await initEngine();
+  Future init(String ext) async {
   }
 
-  String homeContent(bool filter) {
+  Future<String> homeContent(bool filter) async {
     return "";
   }
 
-  String homeVideoContent() {
+  Future<String> homeVideoContent()  async{
     return "";
   }
 

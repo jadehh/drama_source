@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -142,6 +143,62 @@ class OkHttp {
       }
     }
   }
+   Future<Response<dynamic>> req(
+    String url, Map<String,dynamic> opt
+  ) async {
+    try {
+      var data = opt.containsKey("data")  ? opt["data"] : {};
+      var postType = opt.containsKey("postType") ? opt["postType"] : null;
+      var method = opt.containsKey("method")? opt["method"]:"get";
+      var returnBuffer = opt.containsKey("returnBuffer")  ? opt["returnBuffer"] : 0;
+      var redirect = opt.containsKey("redicet") ? true:false;
+      var headers = opt.containsKey("headers") ? opt["headers"]:{};
+      var respType = returnBuffer == 0 ? ResponseType.json:ResponseType.bytes;
+
+      if (postType == 'form') {
+            headers['Content-Type'] = 'application/x-www-form-urlencoded';
+            if (data != null) {
+              data = jsonEncode(data);
+            }
+        } else if (postType == 'form-data') {
+            headers['Content-Type'] = 'multipart/form-data';
+            data = FormData.fromMap(data);
+      }
+      if (method == "get"){
+         var result = await dio.get(
+        url,
+        data: data,
+        options: Options(
+          responseType: respType,
+          headers: headers,
+          followRedirects: redirect
+        ),
+      );
+         return result;
+      }else{
+        var result = await dio.post(url,data:data,options: Options(
+          responseType: respType,
+          headers: headers,
+          followRedirects: redirect
+        ));
+        return result;
+      }
+
+
+
+
+
+    } catch (e) {
+      if (e is DioException && e.type == DioExceptionType.badResponse) {
+        throw HttpError(e.message ?? "",
+            statusCode: e.response?.statusCode ?? 0);
+      } else {
+        throw HttpError("发送GET请求失败");
+      }
+    }
+  }
+
+
   /// Post请求，返回Map
   /// * [url] 请求链接
   /// * [queryParameters] 请求参数

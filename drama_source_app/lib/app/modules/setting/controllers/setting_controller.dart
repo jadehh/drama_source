@@ -12,6 +12,7 @@ import 'package:drama_source_core/drama_source_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:quick_js/quick_js.dart';
 
 class SettingController extends GetxController with WidgetsBindingObserver {
   final languageStr = Local.setting_fllow_system.tr.obs;
@@ -174,6 +175,7 @@ class SettingController extends GetxController with WidgetsBindingObserver {
   onCache() {
     FileUtil.clearCache(Callback(() async {
       (await VodConfig.get().getConfig()).json("").save();
+      Module.get().clear();
       _setCacheText();
     }, () {}));
   }

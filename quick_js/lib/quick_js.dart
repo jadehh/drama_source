@@ -9,3 +9,4 @@
 library quick_js;
 
 export 'src/crawler/spider.dart';
+export 'src/utils/module.dart';

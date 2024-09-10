@@ -10,7 +10,6 @@
 import 'package:drama_source_app/app/modules/vod/controllers/vod_controller.dart';
 import 'package:drama_source_app/app/modules/vod/views/appbar_view.dart';
 import 'package:drama_source_app/app/modules/vod/views/vod_tab_view.dart';
-import 'package:drama_source_app/widgets/app_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,17 +30,15 @@ class VodView extends GetView<VodController> {
                   child: Center(
                       child: IconButton(
                           onPressed: () {
-                            controller.progressVisible.value = ! controller.progressVisible.value;
-                            controller.retryVisible.value = !controller.retryVisible.value ;
                           },
                           icon: const Icon(
                             Icons.refresh,
-                            size: 56,
+                            size: 48,
                             color: Colors.white,
                           )))),
               visible: controller.retryVisible.value)),
           Obx(()=>Visibility(child: Expanded(child: Center(child: CircularProgressIndicator(color: Colors.white,))),visible: controller.progressVisible.value,)),
-          // const Expanded(child: VodTabView(20)),
+          Obx(()=>Visibility(child: Expanded(child: VodTabView(controller.result.value,controller)),visible: !controller.progressVisible.value)),
         ]),
         Positioned(
           right: 16.0,
@@ -50,7 +47,6 @@ class VodView extends GetView<VodController> {
             backgroundColor: Colors.blue,
             onPressed: () async{
               await controller.homeContent();
-              controller.progressVisible.value = ! controller.progressVisible.value;
             },
             child: Icon(Icons.link,color: Colors.white,),
           ),

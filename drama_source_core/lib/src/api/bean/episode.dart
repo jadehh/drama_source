@@ -36,8 +36,8 @@ class Episode {
   late bool? j_selected;
 
   Episode({String? name, String? desc, String? url, int index = 0, bool activated = false, bool selected = false}) {
-    this.j_name = Trans.s2t(name);
-    this.j_desc = Trans.s2t(name);
+    this.j_name = Trans.s2t(text:name);
+    this.j_desc = Trans.s2t(text: name);
     this.j_number = Util.getDigit(name);
     this.j_url = url;
     this.j_index = index;

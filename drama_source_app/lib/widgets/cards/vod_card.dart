@@ -4,16 +4,18 @@
  * @LastEditTime: 2024-08-20 11:06:45
  * @LastEditors: jadehh
  * @Description: 
- * @FilePath: \drama_source\drama_source_app\lib\widgets\cards\live_room_card.dart
+ * @FilePath: \drama_source\drama_source_app\lib\widgets\cards\vod_card.dart
  * 
  */
 
 import 'package:drama_source_app/widgets/cards/shadow_card.dart';
 import 'package:drama_source_app/widgets/net_image.dart';
+import 'package:drama_source_core/drama_source_core.dart';
 import 'package:flutter/material.dart';
 
-class LiveRoomCard extends StatelessWidget {
-  const LiveRoomCard({Key? key}) : super(key: key);
+class VodCard extends StatelessWidget {
+  final Vod vod;
+  const VodCard({Key? key, required this.vod}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class LiveRoomCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 child: NetImage(
-                  "",
+                  vod.getVodPic(),
                   fit: BoxFit.fill,
                   height: 120,
                   width: double.infinity,
@@ -39,7 +41,7 @@ class LiveRoomCard extends StatelessWidget {
                 right: 0,
                 left: 0,
                 bottom: 25,
-                child: Text('文本',
+                child: Text(vod.getVodRemarks(),
                       textAlign: TextAlign.left, // 文本居中对齐
                       style: TextStyle(
                           backgroundColor: Colors.green,
@@ -62,7 +64,7 @@ class LiveRoomCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "name",
+                        vod.getVodName(),
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.white,

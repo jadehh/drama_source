@@ -22,7 +22,7 @@ class Value {
   late bool? j_activated;
 
   Value({String? n, String? v, bool activated = false}) {
-    if (n != null) this.j_n = Trans.s2t(n);
+    if (n != null) this.j_n = Trans.s2t(text: n);
     else this.j_n = n;
     this.j_v = v;
     j_activated = activated;
@@ -60,7 +60,7 @@ class Value {
   }
 
   void trans() {
-    this.j_n = Trans.s2t(j_n);
+    this.j_n = Trans.s2t(text: j_n);
   }
 
   bool equals(Object obj) {

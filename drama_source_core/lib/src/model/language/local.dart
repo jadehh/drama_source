@@ -20,6 +20,8 @@ class Local {
   static const String nav_setting = "设置";
   static const String nav_downloading = "下载";
 
+  //<!-- Vod -->
+  static const String vod_home = "推荐";
   //Setting
   static const String setting_vod = "点播";
   static const String setting_live = "直播";

@@ -89,6 +89,24 @@ class Log {
     }
   }
 
+  static void JSDebug(String message, [bool writeFile = true]) {
+    addDebugLog(message, Colors.blue);
+    logger.d("${DateTime.now().toString()}\n JSInfo:$message");
+    if (writeFile) {
+      logFileWriter?.write("[DEBUG] $_currentTime：JSInfo:$message");
+      writeLog(message, Level.info);
+    }
+  }
+
+  static void JSInfo(String message, [bool writeFile = true]) {
+    addDebugLog(message, Colors.blue);
+    logger.i("${DateTime.now().toString()}\n JSInfo:$message");
+    if (writeFile) {
+      logFileWriter?.write("[INFO] $_currentTime：JSInfo:$message");
+      writeLog(message, Level.info);
+    }
+  }
+
   static void e(String message, StackTrace stackTrace, [bool writeFile = true]) {
     addDebugLog('$message\r\n\r\n$stackTrace', Colors.red);
     logger.e("${DateTime.now().toString()}\n$message\n$stackTrace", stackTrace: stackTrace);

@@ -21,8 +21,8 @@ part 'result.g.dart';
 
 @JsonSerializable()
 class Result {
-  @JsonKey(name: "types")
-  late List<KClass>? j_types;
+  @JsonKey(name: "class")
+  late List<KClass>? j_class;
 
   @JsonKey(name: "list")
   late List<Vod>? j_list;
@@ -95,7 +95,7 @@ class Result {
       int? parse,
       int? code,
       int? jx}) {
-    this.j_types = [];
+    this.j_class = [];
     this.j_list = [];
     this.j_filters = {};
     this.j_url = null;
@@ -171,12 +171,12 @@ class Result {
     return list([item]);
   }
 
-  List<KClass> getTypes() {
-    return j_types == null ? [] : j_types!;
+  List<KClass> getClass() {
+    return j_class == null ? [] : j_class!;
   }
 
   void setTypes(List<KClass> types) {
-    if (types.length > 0) this.j_types = types;
+    if (types.length > 0) this.j_class = types;
   }
 
   List<Vod> getList() {
@@ -326,7 +326,7 @@ class Result {
 
   Result trans() {
     if (Trans.pass()) return this;
-    for (KClass type in getTypes()) type.trans();
+    for (KClass type in getClass()) type.trans();
     for (Vod vod in getList()) vod.trans();
     for (Sub sub in getSubs()) sub.trans();
     return this;

@@ -29,14 +29,17 @@ class Util {
 
   static Future<String> getIp() async {
     try {
+      String ip = "";
       for (var interface in await NetworkInterface.list()) {
         print('== Interface: ${interface.name} ==');
         for (var addr in interface.addresses) {
-          Log.d(
-              '${addr.address} ${addr.host} ${addr.isLoopback} ${addr.rawAddress} ${addr.type.name}');
+          Log.d('${addr.address} ${addr.host} ${addr.isLoopback} ${addr.rawAddress} ${addr.type.name}');
+          ip =  addr.address;
+          break;
         }
+        break;
       }
-      return "";
+      return ip;
     } catch (e, stackTrace) {
       Log.e(e.toString(), stackTrace);
       return "";
@@ -50,11 +53,11 @@ class Util {
     return checksum.toLowerCase() == md5Str.toLowerCase();
   }
 
-  static Future<String> md5(String src) async {
+  static String md5(String src)  {
     try {
       if (TextUtils.isEmpty(src)) return "";
       var md5 = crypto.md5;
-      var sb = hex.encode(await md5.convert(utf8.encode(src)).bytes);
+      var sb = hex.encode(md5.convert(utf8.encode(src)).bytes);
       while (sb.length < 32) "0" + sb;
       return sb.toString().toLowerCase();
     } catch (e) {

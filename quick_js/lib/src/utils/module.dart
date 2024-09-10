@@ -34,7 +34,6 @@ class Module {
 
 
   Future<String> fetch(String name) async {
-    _cache.clear();
     if (_cache.containsKey(name)) return _cache[name]!;
     if (name.startsWith("http")) _cache[name] = await request(name);
     if (name.startsWith("assets")) _cache[name] = await Asset.read(name);
@@ -51,7 +50,7 @@ class Module {
       if (response.isEmpty) return "";
       bool cache = !("127.0.0.1" == uri.host);
       if (cache) await Path.write(file, uint8List: response);
-      return response.toString();
+      return utf8.decode(response);
     } catch (e,stackTrace) {
       Log.e(e.toString(), stackTrace);
       return "";
@@ -66,5 +65,9 @@ class Module {
       newBytes[i] = bytes[i];
     }
     return newBytes;
+  }
+
+  clear(){
+    _cache.clear();
   }
 }

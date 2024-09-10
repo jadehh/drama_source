@@ -51,7 +51,7 @@ class Json {
     if (obj[key] is Map<String, String>)
       result.add(safeString(obj, key));
     else
-      for (var opt in obj[key]) result.add(opt.toString());
+      for (var opt in obj[key]) result.add(jsonEncode(opt));
     return result;
   }
 

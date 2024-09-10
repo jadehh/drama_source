@@ -134,7 +134,7 @@ class KClass {
 
   void trans() {
     if (Trans.pass()) return;
-    this.j_typeName = Trans.s2t(j_typeName);
+    this.j_typeName = Trans.s2t(text: j_typeName);
   }
 
   Style? getStyle() {

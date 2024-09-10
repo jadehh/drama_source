@@ -8,18 +8,17 @@
  */
 
 
+import 'package:drama_source_core/drama_source_core.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class VodItemsController extends GetxController{
    late bool _isLoading;
-  late int _currentItemCount;
-  late List<String> items;
+  late List<Vod> vodList;
   late RefreshController refreshController;
-  VodItemsController() {
-    _currentItemCount = 50;
+  VodItemsController(List<Vod> _vodList) {
+    vodList = _vodList;
     _isLoading = false;
-    items = List.generate(_currentItemCount, (i) => "Item ${i + 1}");
     refreshController  = RefreshController(initialRefresh: false);
   }
 
@@ -30,7 +29,6 @@ class VodItemsController extends GetxController{
 
   Future<void> onRefresh() async {
       await Future.delayed(const Duration(seconds: 2));
-      items = List.generate(_currentItemCount, (i) => "Refreshed Item ${i + 1}");
       refreshController.refreshCompleted();
       update(['vod_items']);
   }
@@ -38,7 +36,6 @@ class VodItemsController extends GetxController{
   Future<void> onLoading() async {
     if (!_isLoading) {
       await Future.delayed(const Duration(seconds: 2));
-      items.addAll(List.generate(5, (i) => 'Item ${i + items.length + 1}'));
       refreshController.loadComplete();
       update(['vod_items']);
       _isLoading = false;

@@ -22,4 +22,5 @@ export 'src/utils/prefers.dart';
 export "src/crawler/spider.dart";
 export "src/crawler/spider_null.dart";
 
+export 'src/proxy.dart';
 

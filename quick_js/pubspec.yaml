@@ -18,8 +18,9 @@ dependencies:
   cat_vod:
     path: ../cat_vod
 
-  flutter_js: ^0.8.1
 
+  flutter_qjs:
+    path: ../flutter_qjs
 
 dev_dependencies:
   flutter_test:

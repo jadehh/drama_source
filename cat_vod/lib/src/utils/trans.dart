@@ -47,12 +47,14 @@ class Trans {
     return !get()._trans;
   }
 
-  static String s2t(String? text) {
-    return text == null ? "" : s2tByPassAndText(pass(), text);
+  static String s2t({bool? passBool,String? text}) {
+    if( passBool != null)  return passBool ? text! : get()._get(text!, get()._s2t);
+    else return text == null ? "" : s2t(passBool: pass(),text:text);
   }
 
-  static String s2tByPassAndText(bool pass, String text) {
-    return pass ? text : get()._get(text, get()._s2t);
+   static String t2s({bool ? passBool, String? text}) {
+    if (passBool != null) return passBool ? text! : get()._get(text!, get()._t2s);
+    else  return text == null ? "" : t2s(passBool: pass(), text: text);
   }
 
   String _get(String text, Map<String, String> map) {

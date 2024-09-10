@@ -10,6 +10,7 @@
 * 格式化代码
 * 添加Log和CatVod模块
 * 分离HttpClient模块
+* 原生支持QuickJS爬虫
 <details onclose>
 <summary>查看更多更新日志</summary>
 

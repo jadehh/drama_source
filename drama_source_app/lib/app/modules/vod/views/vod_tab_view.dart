@@ -8,29 +8,28 @@
  */
 
 import 'package:drama_source_app/app/app_style.dart';
-import 'package:drama_source_app/app/modules/vod/controllers/vod_tab_controller.dart';
+import 'package:drama_source_app/app/modules/vod/controllers/vod_controller.dart';
+import 'package:drama_source_core/drama_source_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class VodTabView extends GetView<VodTabController> {
-  final int pageCount;
-  const VodTabView(this.pageCount, {super.key});
+class VodTabView extends StatelessWidget {
+  final Result result;
+  final VodController vodController;
+  const VodTabView(this.result, this.vodController, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    VodTabController controller = Get.put(VodTabController(pageCount));
     return Column(children: [
       TabBar(
         indicatorColor: Colors.transparent,
         labelPadding: AppStyle.edgeInsetsA8,
-        controller: controller.tabController,
+        controller: vodController.tabController,
         isScrollable: true,
         tabAlignment: TabAlignment.start,
-        tabs: controller.tabs,
+        tabs: vodController.tabs,
       ),
       Expanded(
-        child: TabBarView(
-            controller: controller.tabController, children: controller.items),
+        child: TabBarView(controller: vodController.tabController, children: vodController.items),
       )
     ]);
   }

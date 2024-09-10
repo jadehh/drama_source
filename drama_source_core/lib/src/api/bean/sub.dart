@@ -94,7 +94,7 @@ class Sub {
 
   void trans() {
     if (Trans.pass()) return;
-    this.j_name = Trans.s2t(j_name);
+    this.j_name = Trans.s2t(text: j_name);
   }
 
   //  MediaItem.SubtitleConfiguration getConfig() {

@@ -38,7 +38,7 @@ class Flag {
 
   Flag({String? flag, String? show, String? urls, bool activated = false, int position = -1}) {
     this.j_flag = flag;
-    if (show != null) this.j_show = Trans.s2t(show);
+    if (show != null) this.j_show = Trans.s2t(text: show);
     else this.j_show = show;
     this.j_urls = urls;
     this.j_episodes = [];

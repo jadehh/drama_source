@@ -20,7 +20,7 @@ part 'vod.g.dart';
 
 @JsonSerializable()
 class Vod {
-  @JsonKey(name: "vod_id")
+  @JsonKey(name: "vod_id",fromJson: vodIdToJson)
   late String? vodId;
 
   @JsonKey(name: "vod_name")
@@ -283,13 +283,13 @@ class Vod {
 
   void trans() {
     if (Trans.pass()) return;
-    this.vodName = Trans.s2t(vodName);
-    this.vodArea = Trans.s2t(vodArea);
-    this.typeName = Trans.s2t(typeName);
-    this.vodRemarks = Trans.s2t(vodRemarks);
-    if (vodActor != null) this.vodActor = Sniffer.CLICKER.hasMatch(vodActor!) ? vodActor : Trans.s2t(vodActor);
-    if (vodContent != null) this.vodContent = Sniffer.CLICKER.hasMatch(vodContent!) ? vodContent : Trans.s2t(vodContent);
-    if (vodDirector != null) this.vodDirector = Sniffer.CLICKER.hasMatch(vodDirector!) ? vodDirector : Trans.s2t(vodDirector);
+    this.vodName = Trans.s2t(text: vodName);
+    this.vodArea = Trans.s2t(text: vodArea);
+    this.typeName = Trans.s2t(text: typeName);
+    this.vodRemarks = Trans.s2t(text: vodRemarks);
+    if (vodActor != null) this.vodActor = Sniffer.CLICKER.hasMatch(vodActor!) ? vodActor : Trans.s2t(text: vodActor);
+    if (vodContent != null) this.vodContent = Sniffer.CLICKER.hasMatch(vodContent!) ? vodContent : Trans.s2t(text: vodContent);
+    if (vodDirector != null) this.vodDirector = Sniffer.CLICKER.hasMatch(vodDirector!) ? vodDirector : Trans.s2t(text: vodDirector);
   }
 
   bool equals(Object obj) {
@@ -297,4 +297,8 @@ class Vod {
     if (!(obj is Vod)) return false;
     return getVodId() == obj.getVodId();
   }
+}
+
+String vodIdToJson(String vod_id){
+  return vod_id.toString();
 }
