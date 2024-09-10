@@ -42,17 +42,17 @@ class JarLoader {
 
     }
 
-     void _invokeInit(String key) {
-        try {
+    //  void _invokeInit(String key) {
+    //     try {
+    //
+    //     } catch (e) {
+    //
+    //     }
+    // }
 
-        } catch (e) {
-
-        }
-    }
-
-     void _putProxy(String key) {
-
-    }
+    //  void _putProxy(String key) {
+    //
+    // }
 
      Future<FileSystemEntity> _download(String url) async {
         try {

@@ -8,11 +8,9 @@
  * 
  */
 
-import 'dart:io';
 import 'dart:math';
 
 import 'package:cat_vod/cat_vod.dart';
-import 'package:drama_source_core/drama_source_core.dart';
 import 'package:drama_source_core/src/player/Players.dart';
 
 class Setting {

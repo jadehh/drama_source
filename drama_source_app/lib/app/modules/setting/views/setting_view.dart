@@ -14,7 +14,6 @@ import 'package:drama_source_app/app/modules/setting/views/custom_setting_view.d
 import 'package:drama_source_app/app/modules/setting/views/normal_setting_view.dart';
 import 'package:drama_source_app/app/modules/setting/views/setting_app_bar_view.dart';
 import 'package:drama_source_app/routes/route_path.dart';
-import 'package:drama_source_app/widgets/app_scaffold.dart';
 import 'package:drama_source_core/drama_source_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

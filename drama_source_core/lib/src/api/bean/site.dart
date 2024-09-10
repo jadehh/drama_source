@@ -65,7 +65,7 @@ class Site {
   @JsonKey(name: "categories")
   late List<String>? j_categories;
 
-  @JsonKey(name: "header",defaultValue: "")
+  @JsonKey(name: "header")
   late Map<String, dynamic>? j_header;
 
   @JsonKey(name: "style")

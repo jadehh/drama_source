@@ -21,7 +21,7 @@ part 'vod.g.dart';
 @JsonSerializable()
 class Vod {
   @JsonKey(name: "vod_id",fromJson: vodIdToJson)
-  late String? vodId;
+  late Object? vodId;
 
   @JsonKey(name: "vod_name")
   late String? vodName;
@@ -128,7 +128,7 @@ class Vod {
   Map<String, dynamic> toJson() => _$VodToJson(this);
 
   String getVodId() {
-    return TextUtils.isEmpty(vodId) ? "" : vodId!.trim();
+    return TextUtils.isEmpty(vodId.toString()) ? "" : vodId!.toString().trim();
   }
 
   void setVodId(String vodId) {
@@ -299,6 +299,6 @@ class Vod {
   }
 }
 
-String vodIdToJson(String vod_id){
+String vodIdToJson(vod_id){
   return vod_id.toString();
 }

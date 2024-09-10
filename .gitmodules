@@ -1,0 +1,4 @@
+[submodule "flutter_qjs"]
+	path = flutter_qjs
+	url = https://github.com/jadehh/flutter_qjs.git
+

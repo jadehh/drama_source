@@ -17,7 +17,6 @@ import 'package:drama_source_core/src/api/bean/drm.dart';
 import 'package:drama_source_core/src/api/bean/epg.dart';
 import 'package:drama_source_core/src/api/bean/group.dart';
 import 'package:drama_source_core/src/api/bean/live.dart';
-import 'package:drama_source_core/src/api/bean/result.dart';
 import 'package:drama_source_core/src/api/bean/url.dart';
 import 'package:drama_source_log/drama_source_log.dart';
 import 'package:json_annotation/json_annotation.dart';

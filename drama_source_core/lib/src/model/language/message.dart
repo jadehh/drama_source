@@ -25,8 +25,8 @@ class Messages extends Translations {
           Local.nav_setting:Local.nav_setting,
           Local.nav_downloading:  Local.nav_downloading,
           //Setting
-          Local.setting_vod: Local.setting_vod,
-          Local.setting_live: Local.setting_live,
+          // Local.setting_vod: Local.setting_vod,
+          // Local.setting_live: Local.setting_live,
           Local.setting_wall: Local.setting_wall,
           Local.setting_player: Local.setting_player,
           Local.setting_danmu: Local.setting_danmu,

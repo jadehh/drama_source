@@ -34,6 +34,7 @@ class Spider extends CatVod.Spider {
 
   @override
   Future init(String ext) async {
+    if (_cat!);
     await  initEngine();
     await _cfg(ext);
     await _ctx!.evaluate("__JS_SPIDER__.init(ext)");
@@ -78,7 +79,6 @@ class Spider extends CatVod.Spider {
       await setToGlobalObject.invoke(Global.setMd5X());
       await setToGlobalObject.invoke(Local.setLocal());
       setToGlobalObject.free();
-      await _ctx!.evaluate('print(["1","2"])');
 
       // await _ctx!.evaluate('console.log("Hello QuickJs");');
       // var a = await _ctx!.evaluate('s2t("123");');

@@ -8,8 +8,6 @@
  */
 import 'package:cat_vod/cat_vod.dart';
 import 'package:drama_source_core/drama_source_core.dart';
-import 'package:drama_source_core/src/api/bean/result.dart';
-import 'package:drama_source_core/src/api/bean/vod.dart';
 import 'package:drama_source_log/drama_source_log.dart';
 import 'package:ok_http/requests/ok_http.dart';
 

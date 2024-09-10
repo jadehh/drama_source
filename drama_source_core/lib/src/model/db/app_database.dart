@@ -16,8 +16,6 @@ import 'package:drama_source_core/src/model/db/dao/live_dao.dart';
 import 'package:drama_source_core/src/model/db/dao/site_dao.dart';
 import 'package:drama_source_log/drama_source_log.dart';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-// import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class AppDatabase {
