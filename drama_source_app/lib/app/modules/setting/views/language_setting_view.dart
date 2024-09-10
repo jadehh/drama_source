@@ -9,7 +9,6 @@
  */
 
 import 'package:drama_source_app/app/modules/setting/controllers/language_setting_controller.dart';
-import 'package:drama_source_app/widgets/app_scaffold.dart';
 import 'package:drama_source_app/widgets/base_app_bar_view.dart';
 import 'package:drama_source_core/drama_source_core.dart';
 import 'package:flutter/material.dart';
