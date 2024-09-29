@@ -27,9 +27,9 @@ class JsLoader {
     _spiders.clear();
   }
 
-  Future<Spider?> getSpider(String key, String api, String ext) async {
+  Future<Spider> getSpider(String key, String api, String ext) async {
     try {
-      // if (_spiders.containsKey(key))  return _spiders[key];
+      if (_spiders.containsKey(key))  return _spiders[key]!;
       Spider spider = QuickJs.Spider(key, api) as Spider;
       await spider.init(ext);
       _spiders[key] = spider;

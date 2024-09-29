@@ -31,7 +31,7 @@ class DebugLogPage extends StatelessWidget {
               var msg = Log.debugLogs
                   .map((x) => "${x.datetime}\r\n${x.content}")
                   .join('\r\n\r\n');
-              var dir = await getApplicationDocumentsDirectory();
+              var dir = await getApplicationCacheDirectory();
               var logFile = File(
                   '${dir.path}/${DateTime.now().millisecondsSinceEpoch}.log');
               await logFile.writeAsString(msg);

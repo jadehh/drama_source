@@ -7,8 +7,12 @@
  * @FilePath: \drama_source\drama_source_app\lib\widgets\net_image.dart
  * 
  */
-import 'package:extended_image/extended_image.dart';
+
+import 'package:drama_source_core/drama_source_core.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ok_http/ok_http.dart';
+
 
 class NetImage extends StatelessWidget {
   final String picUrl;
@@ -26,44 +30,50 @@ class NetImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var errorImage  =  Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/images/res/ic_img_error.png'),
+            fit: BoxFit.fill)
+      ),
+    );
+
+
+    var loadImage  = Container(
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/res/ic_img_loading.png'),
+              fit: BoxFit.fill)
+      ),
+    );
     if (picUrl.isEmpty) {
-      return Image.asset(
-        'assets/images/res/ic_img_error.png',
-        width: width,
-        height: height,
-        fit: fit,
-      );
+      return errorImage;
     }
-    var pic = picUrl;
-    if (pic.startsWith("//")) {
-      pic = 'https:$pic';
-    }
+
+    var results = Utils.getPic(picUrl);
+
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
-      child: ExtendedImage.network(
-        pic,
-        fit: fit,
-        height: height,
-        width: width,
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(borderRadius),
-        loadStateChanged: (e) {
-          if (e.extendedImageLoadState == LoadState.loading) {
-            return const Icon(
-              Icons.image,
-              color: Colors.grey,
-              size: 24,
-            );
-          }
-          if (e.extendedImageLoadState == LoadState.failed) {
-            return const Icon(
-              Icons.broken_image,
-              color: Colors.grey,
-              size: 24,
-            );
-          }
-          return null;
-        },
+      child: CachedNetworkImage(
+        imageUrl: results["pic"],
+        httpHeaders: results["headers"],
+        imageBuilder: (context, imageProvider) => Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: imageProvider,
+                fit: fit)
+          ),
+        ),
+        cacheManager: HttpClientCacheManger.instance,
+        placeholder: (context, url) => loadImage,
+        errorWidget: (context, url, error) => errorImage,
       ),
     );
   }

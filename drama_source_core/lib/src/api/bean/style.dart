@@ -18,10 +18,10 @@ part 'style.g.dart';
 @JsonSerializable()
 class Style {
   @JsonKey(name: "type")
-  late final String? j_type;
+  late  String? j_type;
 
   @JsonKey(name: "ratio")
-  late final double? j_ratio;
+  late  double? j_ratio;
 
   Style({String? type, double? ratio}) {
     this.j_type = type;

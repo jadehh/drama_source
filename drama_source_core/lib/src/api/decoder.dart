@@ -21,11 +21,11 @@ class Decoder {
     url = url.contains(";") ? url.split(";")[0] : url;
     String data = await _getData(url);
     if (data.isEmpty) throw Exception("数据为空:检查${url}");
-    if (Json.valid(data)) return _fix(url, data);
+    if (Json.valid(data)) return await _fix(url, data);
     if (data.contains("**")) data = _base64(data);
     if (data.startsWith("2423")) data = await _cbc(data);
     if (key.length > 0) data = await _ecb(data, key);
-    return _fix(url, data);
+    return await _fix(url, data);
   }
 
   static Future<String> _cbc(String data) async {
@@ -62,18 +62,18 @@ class Decoder {
 
   static Future<String> _fix(String url, String data) async {
     if (url.startsWith("file") || url.startsWith("assets")) url = await UrlUtil.convert(url);
-    if (data.contains("../")) data = data.replaceAll("../", await UrlUtil.resolve(url, "../"));
-    if (data.contains("./")) data = data.replaceAll("./", await UrlUtil.resolve(url, "./"));
+    if (data.contains("../")) data = data.replaceAll("../",  UrlUtil.resolve(url, "../"));
+    if (data.contains("./")) data = data.replaceAll("./",  UrlUtil.resolve(url, "./"));
     return data;
   }
 
   static Future<FileSystemEntity> getSpider(String url) async{
         try {
-            FileSystemEntity file = await Path.jar(name: url);
+            FileSystemEntity file = Path.jar(name: url);
             String data = _extract(await _getData(url.substring(4)));
             return data.isEmpty ? file: await Path.write(file, str: _base64(data));
         } catch (e) {
-            return await Path.jar(name: url);
+            return  Path.jar(name: url);
         }
     }
 

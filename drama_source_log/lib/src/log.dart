@@ -146,7 +146,7 @@ class LogFileWriter {
   }
   IOSink? fileWriter;
   void initFile(String version,String buildNumber) async {
-    var supportDir = await getApplicationSupportDirectory();
+    var supportDir = await getApplicationCacheDirectory();
     var logDir = Directory("${supportDir.path}/log");
     if (!await logDir.exists()) {
       await logDir.create();

@@ -245,6 +245,26 @@ class AppStyle {
         color: Colors.grey.withOpacity(.1),
       );
 
+  static ButtonStyle lightOutLineButtonSiteStyle() {
+    return ButtonStyle(
+      side: WidgetStateProperty.all(
+        BorderSide(color: Colors.black,width: 0.5), // 设置边框颜色为蓝色
+      ),
+       shape: WidgetStateProperty.all(
+         RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
+       ),
+      overlayColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+        if (states.contains(WidgetState.focused) ||
+            states.contains(WidgetState.pressed)) {
+          return Colors.blue.withOpacity(0.5); // 选中状态下的颜色
+        }
+        return null;
+      }),
+      backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
+    );
+  }
+
+
   static ButtonStyle lightOutLineButtonNormalStyle() {
     return ButtonStyle(
       side: WidgetStateProperty.all(

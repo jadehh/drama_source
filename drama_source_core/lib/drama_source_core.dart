@@ -10,6 +10,7 @@
 library drama_source_core;
 
 import 'package:cat_vod/cat_vod.dart';
+import 'package:drama_source_core/src/service/sync_service.dart';
 import 'package:drama_source_log/drama_source_log.dart';
 import 'package:drama_source_core/drama_source_core.dart';
 import 'package:drama_source_core/src/model/db/app_database.dart';
@@ -35,11 +36,14 @@ export 'src/utils/notify.dart';
 export 'src/impl/call_back.dart';
 export "src/api/bean/config.dart";
 export 'src/api/bean/rule.dart';
+export 'src/api/bean/filter.dart';
 export 'src/api/bean/ext.dart';
 export 'src/api/bean/site.dart';
 export 'src/api/bean/result.dart';
 export 'src/api/bean/k_class.dart';
 export 'src/api/bean/vod.dart';
+export 'src/constant.dart';
+export 'src/impl/site_callback.dart';
 
 export 'src/model/site_view_model.dart';
 
@@ -60,6 +64,9 @@ class DramaSourceCore {
     //初始化路径
     await initPath();
     await Get.put(DBService()).init();
+
+    Get.put(SyncService());
+
     await AppDatabase.instance.init();
     //初始化设置控制器
     await Get.put(AppSettingsController());

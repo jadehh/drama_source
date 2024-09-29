@@ -1,14 +1,3 @@
-/*
- * @File     : app_loadding_widget.dart
- * @Author   : jade
- * @Date     : 2024/08/19 03:09:38
- * @Email    : jadehh@1ive.com
- * @Software : Samples
- * @Desc     :
- */
-
-
-
 import 'package:drama_source_app/app/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

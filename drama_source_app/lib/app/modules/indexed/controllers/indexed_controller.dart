@@ -11,7 +11,7 @@
 import 'dart:io';
 
 import 'package:drama_source_app/app/app_style.dart';
-import 'package:drama_source_app/app/constant.dart';
+import 'package:drama_source_app/app/constant.dart' as Constant;
 import 'package:drama_source_app/app/modules/download/controllers/download_controller.dart';
 import 'package:drama_source_app/app/modules/download/views/download_view.dart';
 import 'package:drama_source_app/app/modules/setting/controllers/setting_controller.dart';
@@ -25,7 +25,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 
 class IndexedController extends GetxController {
-  RxList<HomePageItem> items = RxList<HomePageItem>([]);
+  RxList<Constant.HomePageItem> items = RxList<Constant.HomePageItem>([]);
 
   var index = 0.obs;
   RxList<Widget> pages = RxList<Widget>([
@@ -70,7 +70,7 @@ class IndexedController extends GetxController {
     super.onInit();
     Future.delayed(Duration.zero, showFirstRun);
     items.value = AppSettingsController.instance.homeSort
-        .map((key) => Constant.allHomePages[key]!)
+        .map((key) => Constant.Constant.allHomePages[key]!)
         .toList();
     setIndex(0);
     _initConfig();

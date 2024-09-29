@@ -35,10 +35,15 @@ class LanguageSettingDialog extends GetView<LanguageSettingsController> {
           Expanded(child: ListView.builder(
               itemCount: controller.languageList.length,
               itemBuilder: (context, index) {
-                return CheckboxListTile(  controlAffinity: ListTileControlAffinity.leading,value: index==controller.currentLanguageIndex.value, onChanged: (value) async {
+                return CheckboxListTile(
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: index==controller.currentLanguageIndex.value,
+                  onChanged: (value) async {
                    await controller.changeLanguage(index);
                    Navigator.of(Get.overlayContext!, rootNavigator: true).pop();
-              },title:  Text(controller.languageList[index],style: const TextStyle(fontSize: 16),),);
+              },
+                  title:  Text(controller.languageList[index],
+                    style: const TextStyle(fontSize: 16),),);
               },
             )),
             const Padding(padding: EdgeInsets.only(top: 5)),

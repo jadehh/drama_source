@@ -38,7 +38,9 @@ android {
         }
     }
 }
-
+dependencies {
+    implementation(project(":catvod"))
+}
 flutter {
     source = "../.."
 }

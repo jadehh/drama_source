@@ -27,7 +27,6 @@ class Json {
       jsonDecode(text);
       return true;
     } catch (e, stackTrace) {
-      Log.e(e.toString(), stackTrace);
       return false;
     }
   }

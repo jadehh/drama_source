@@ -8,41 +8,40 @@
  * 
  */
 import 'package:drama_source_app/app/app_style.dart';
-import 'package:drama_source_app/app/modules/vod/controllers/vod_items_controller.dart';
-import 'package:drama_source_app/widgets/base_footer_view.dart';
+import 'package:drama_source_app/app/modules/vod/controllers/vod_list_controller.dart';
 import 'package:drama_source_app/widgets/cards/vod_card.dart';
-import 'package:drama_source_core/drama_source_core.dart';
+import 'package:drama_source_app/widgets/keep_alive_wrapper.dart';
+import 'package:drama_source_app/widgets/page_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 
 class VodPageView extends StatelessWidget {
-  final String id;
-  final List <Vod> list;
-  const VodPageView({required this.list,required this.id, super.key});
+  final String tag;
+
+  const VodPageView({required this.tag, super.key});
+
+  VodListController get controller => Get.find<VodListController>(tag: tag);
+
   @override
   Widget build(BuildContext context) {
-    VodItemsController vodItemsController = Get.put(VodItemsController(list), tag: id);
-            return SmartRefresher(
-            footer: const BaseFooterView(),
-            controller: vodItemsController.refreshController,
-            enablePullDown: true,
-            enablePullUp: true,
-            onRefresh: vodItemsController.onRefresh,
-            onLoading: vodItemsController.onLoading,
-            child: MasonryGridView.count(
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              padding: AppStyle.edgeInsetsA24,
-              itemCount: list.length,
-              itemBuilder: (context, index) {
-                 return VodCard(
-                    vod: list[index],
-                  );       
-              }, crossAxisCount: Utils.calculateColumnCount(context, 120),
-            ));
+    var c = MediaQuery.of(context).size.width ~/ 200;
+    if (c < 2) {
+      c = 2;
+    }
+    return KeepAliveWrapper(
+      child: PageGridView(
+        pageController: controller,
+        padding: AppStyle.edgeInsetsA12,
+        firstRefresh: true,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+        crossAxisCount: c,
+        itemBuilder: (_, i) {
+          var item = controller.list[i];
+          return VodCard(controller.siteViewModel, item);
+        },
+      ),
+    );
   }
-
 }

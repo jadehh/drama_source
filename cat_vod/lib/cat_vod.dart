@@ -23,4 +23,4 @@ export "src/crawler/spider.dart";
 export "src/crawler/spider_null.dart";
 
 export 'src/proxy.dart';
-
+export 'src/crawler/jar_spider_android.dart';

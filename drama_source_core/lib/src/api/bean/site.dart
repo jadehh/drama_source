@@ -44,22 +44,22 @@ class Site {
   @JsonKey(name: "playUrl")
   late String? j_playUrl;
 
-  @JsonKey(name: "type")
+  @JsonKey(name: "type", fromJson: objectToInt)
   late int? j_type;
 
-  @JsonKey(name: "indexs")
+  @JsonKey(name: "indexs", fromJson: objectToInt)
   late int? j_indexs;
 
-  @JsonKey(name: "timeout")
+  @JsonKey(name: "timeout", fromJson: objectToInt)
   late int? j_timeout;
 
-  @JsonKey(name: "playerType")
+  @JsonKey(name: "playerType", fromJson: objectToInt)
   late int? j_playerType;
 
-  @JsonKey(name: "searchable")
+  @JsonKey(name: "searchable", fromJson: objectToInt)
   late int? j_searchable;
 
-  @JsonKey(name: "changeable")
+  @JsonKey(name: "changeable", fromJson: objectToInt)
   late int? j_changeable;
 
   @JsonKey(name: "categories")
@@ -101,6 +101,14 @@ class Site {
   factory Site.fromJson(Map<String, dynamic> json) => _$SiteFromJson(json);
 
   Map<String, dynamic> toJson() => _$SiteToJson(this);
+
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Site && runtimeType == other.runtimeType && j_key == other.j_key;
+
+  @override
+  int get hashCode => j_key.hashCode;
 
   static Site get({String? key, String? name}) {
     Site site = Site();
@@ -274,6 +282,28 @@ class Site {
   }
 }
 
-String extToJson(Map<String,dynamic> ext){
-  return jsonEncode(ext);
+String extToJson(Object ? ext){
+  if(ext!=null){
+    if (Json.valid(ext.toString())){
+      return jsonEncode(ext);
+    }else{
+      return ext.toString();
+    }
+  }else{
+    return "";
+  }
+}
+
+int objectToInt(Object? type){
+  if(type != null){
+    try{
+      return int.parse(type.toString());
+    }catch(e){
+      print(e);
+      return 0;
+    }
+
+  }else{
+    return 0;
+  }
 }

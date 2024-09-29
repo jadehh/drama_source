@@ -21,9 +21,7 @@ class CustomSettingView extends GetView<NormalSettingController> {
   final VoidCallback onPressed1;
   final VoidCallback onPressed2;
   final IconData iconData;
-  const CustomSettingView(this.name, this.text, this.onPressed, this.onPressed1,
-      this.onPressed2, this.iconData,
-      {super.key});
+  const CustomSettingView(this.name, this.text, this.onPressed, this.onPressed1, this.onPressed2, this.iconData, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,7 @@ class CustomSettingView extends GetView<NormalSettingController> {
             const Padding(padding: EdgeInsets.only(left: 20)),
             BaseImageIconButton(Icons.home, onPressed1),
             const Padding(padding: EdgeInsets.only(left: 20)),
-            BaseImageIconButton(Icons.history, onPressed2),
+            BaseImageIconButton(iconData, onPressed2),
           ]
 
         ));

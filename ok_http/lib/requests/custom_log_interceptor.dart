@@ -25,9 +25,7 @@ class CustomLogInterceptor extends Interceptor {
     var time =
         DateTime.now().millisecondsSinceEpoch - err.requestOptions.extra["ts"];
     if (!kReleaseMode) {
-      Log.e('''【HTTP请求错误-${err.type}】 耗时:${time}ms
-${err.message}
-
+      Log.e('''【HTTP请求错误-${err.type}】 耗时:${time}ms${err.message}
 Request Method：${err.requestOptions.method}
 Response Code：${err.response?.statusCode}
 Request URL：${err.requestOptions.uri}

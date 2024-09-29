@@ -44,11 +44,11 @@ class Path {
     if (child != null) return _mkdir(
         Directory(path.join((root()).absolute.path, child)), name: name);
     if (name != null) return Directory(path.join((root()).absolute.path, name));
-    return Directory((getApplicationDocumentsDirectory()));
+    return Directory((getApplicationCacheDirectory()));
   }
 
   static FileSystemEntity download() {
-    return _mkdir(Directory((getApplicationDocumentsDirectory()) + "Downloads"));
+    return _mkdir(Directory((getApplicationCacheDirectory()) + "Downloads"));
   }
 
   static FileSystemEntity cache({String? name}) {
@@ -67,7 +67,7 @@ class Path {
 
   static FileSystemEntity files({String? name}) {
     if (name != null) return File(path.join((files()).absolute.path, name));
-    return Directory((getApplicationDocumentsDirectory()));
+    return Directory((getApplicationCacheDirectory()));
   }
 
   static String rootPath() {
@@ -100,9 +100,8 @@ class Path {
     return _mkdir(Directory(path.join((cache()).absolute.path, "py")));
   }
 
-  static Future<FileSystemEntity> jar({String? name}) async {
-    if (name != null) return new File(
-        path.join((await jar()).absolute.path, await Util.md5(name) + ".jar"));
+  static FileSystemEntity jar({String? name})   {
+    if (name != null) return new File(path.join(( jar()).absolute.path,   Util.md5(src: name) + ".jar"));
     return _mkdir(Directory(path.join((cache()).absolute.path, "jar")));
   }
 

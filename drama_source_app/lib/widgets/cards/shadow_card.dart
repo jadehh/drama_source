@@ -6,12 +6,6 @@
  * @Software : Samples
  * @Desc     :
  */
-
-
-
-
-
-
 import 'package:drama_source_app/app/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,7 +36,7 @@ class ShadowCard extends StatelessWidget {
               ],
       ),
       child: Material(
-        color: Theme.of(context).cardColor,
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(radius),
         child: InkWell(
           borderRadius: BorderRadius.circular(radius),

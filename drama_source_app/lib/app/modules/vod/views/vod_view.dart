@@ -8,8 +8,11 @@
  * 
  */
 import 'package:drama_source_app/app/modules/vod/controllers/vod_controller.dart';
-import 'package:drama_source_app/app/modules/vod/views/appbar_view.dart';
+import 'package:drama_source_app/app/modules/vod/dialog/site_dialog.dart';
+import 'package:drama_source_app/app/modules/vod/views/search_view.dart';
 import 'package:drama_source_app/app/modules/vod/views/vod_tab_view.dart';
+import 'package:drama_source_app/widgets/icon_button/base_icon_button.dart';
+import 'package:drama_source_core/drama_source_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,15 +24,27 @@ class VodView extends GetView<VodController> {
     return Stack(
       children: [
         Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          const SizedBox(
+           SizedBox(
             height: 60.0, // 设置高度
-            child: AppBarView(),
+            child: Row(
+              children: [
+                BaseIconButton(Icons.donut_large_outlined, (){
+                  if(VodConfig.get().getSites().length > 0) {
+                    Get.dialog(SiteDialog(controller.getSiteCallBack()));
+                  }
+                }),
+                Expanded(child:const SearchView()),
+                BaseIconButton(Icons.star, (){}),
+                BaseIconButton(Icons.history, (){})
+              ],
+            ),
           ),
           Obx( ()=> Visibility(
               child: Expanded(
                   child: Center(
                       child: IconButton(
-                          onPressed: () {
+                          onPressed: () async{
+                           await controller.homeContent();
                           },
                           icon: const Icon(
                             Icons.refresh,
@@ -37,10 +52,12 @@ class VodView extends GetView<VodController> {
                             color: Colors.white,
                           )))),
               visible: controller.retryVisible.value)),
-          Obx(()=>Visibility(child: Expanded(child: Center(child: CircularProgressIndicator(color: Colors.white,))),visible: controller.progressVisible.value,)),
-          Obx(()=>Visibility(child: Expanded(child: VodTabView(controller.result.value,controller)),visible: !controller.progressVisible.value)),
+          Obx(()=>Visibility(child: Expanded(child: Center(child: CircularProgressIndicator(color: Colors.white,))),
+            visible: controller.progressVisible.value,)),
+          Obx(()=>Visibility(child: Expanded(child: VodTabView(controller.result.value,controller))
+              ,visible: controller.vodVisable.value)),
         ]),
-        Positioned(
+        Obx(()=>Visibility(child: Positioned(
           right: 16.0,
           bottom: 16.0,
           child: FloatingActionButton(
@@ -50,7 +67,7 @@ class VodView extends GetView<VodController> {
             },
             child: Icon(Icons.link,color: Colors.white,),
           ),
-        ),
+        ),visible: controller.linkVisable.value)),
       ],
     );
   }

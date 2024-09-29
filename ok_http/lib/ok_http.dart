@@ -8,3 +8,4 @@
  */
 library ok_http;
 export 'requests/ok_http.dart';
+export 'core/cache_manager/http_client_cache_manger.dart';

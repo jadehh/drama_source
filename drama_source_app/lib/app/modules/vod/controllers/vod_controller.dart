@@ -7,6 +7,7 @@
  * @Desc     :
  */
 import 'dart:async';
+import 'package:drama_source_app/app/modules/vod/controllers/vod_list_controller.dart';
 import 'package:drama_source_app/app/modules/vod/views/vod_page_view.dart';
 import 'package:drama_source_app/widgets/button/highlight_button.dart';
 import 'package:drama_source_core/drama_source_core.dart';
@@ -17,11 +18,14 @@ import 'package:get/get.dart';
 class VodController extends GetxController with GetTickerProviderStateMixin {
   final retryVisible = false.obs;
   final progressVisible = false.obs;
+  final vodVisable = false.obs;
+  final linkVisable = true.obs;
   final Rx<Result> result = Result().obs;
   late final SiteViewModel mViewModel;
   StreamSubscription<dynamic>? streamSubscription;
 
   final List<Widget> items = [];
+  final List<VodListController> vodListControllers = [];
   final List<Widget> tabs = [];
   late TabController tabController;
   final tabIndex = 0.obs;
@@ -49,7 +53,7 @@ class VodController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void initTableController(){
-    if (result.value.getClass().length  != 0){
+    if (result.value.getList().length  != 0){
       tabController = TabController(length: this.result.value.getClass().length + 1 , vsync: this);
     }else{
       tabController = TabController(length: this.result.value.getClass().length , vsync: this);
@@ -67,15 +71,8 @@ class VodController extends GetxController with GetTickerProviderStateMixin {
   homeContent() async {
     setSiteText();
     showProgress();
-    // _setFabVisible(0);
-    // mAdapter.clear();
-
-    Future.delayed(Duration(seconds: 5), () async {
-      result.value = await mViewModel.homeContent();
-      setAdapter();
-    });
-    // mBinding.pager.setAdapter(new PageAdapter(getChildFragmentManager()));
-
+    result.value = await mViewModel.homeContent();
+    setAdapter();
   }
 
   void setSiteText() {
@@ -91,20 +88,18 @@ class VodController extends GetxController with GetTickerProviderStateMixin {
     initTabsView();
     hideProgress();
     checkRetry();
+    checkVod();
   }
 
   void initTabsView() {
-    if (tabController.length != this.result.value.getClass().length){
-      tabController.dispose();
-      initTableController();
-    }
+    tabController.dispose();
+    initTableController();
+    result.value.getClass().insert(0, _home());;
     clear();
-
-    var classes = result.value.getClass();
-    classes.insert(0, _home());
     for (int i = 0; i < result.value.getClass().length; i++) {
       AppFocusNode appFocusNode = AppFocusNode();
       _focusList.add(appFocusNode);
+      var type_id = result.value.getClass()[i].getTypeId();
       // tabs.add(TypeView(title: "V$i", index: tabIndex.value, tabController: tabController));
       tabs.add(Obx(() => HighlightButton(
             focusNode: appFocusNode,
@@ -114,21 +109,29 @@ class VodController extends GetxController with GetTickerProviderStateMixin {
               tabController.animateTo(i);
             },
           )));
-      items.add(VodPageView(list:result.value.getList(),id: result.value.getClass()[i].getTypeId()));
+      var filters =  result.value.getFilters()[type_id] ;
+
+      Get.put(VodListController(mViewModel,filters,type_id), tag: result.value.getClass()[i].getTypeId());
+      items.add(VodPageView(tag: result.value.getClass()[i].getTypeId()));
     }
+
+  }
+  void checkRetry() {
+    retryVisible.value = (result.value.getClass().length == 0 ? true : false); //有结果隐藏重试按钮，无结果显示重试按钮
   }
 
-  void checkRetry() {
-    retryVisible.value = (result.value.getClass().length == 0 ? true : false);
+  void checkVod(){
+    vodVisable.value = (result.value.getClass().length == 0 ? false : true); //有结果显示，无结果隐藏
+    linkVisable.value = (result.value.getClass().length == 0 ? true : false);
   }
 
   showProgress() {
-    retryVisible.value = false;
-    progressVisible.value = true;
+    retryVisible.value = false;   //隐藏重试按钮
+    progressVisible.value = true; //显示进度条
   }
 
   void hideProgress() {
-    progressVisible.value = false;
+    progressVisible.value = false; //隐藏进度条
   }
 
   @override
@@ -149,4 +152,22 @@ class VodController extends GetxController with GetTickerProviderStateMixin {
     type.setTypeId("home");
     return type;
   }
+
+  SiteCallback getSiteCallBack() {
+    SiteCallback callBack = SiteCallback(setSite, onChange);
+    return callBack;
+  }
+
+
+  Future setSite(Site item) async {
+    result.value = Result();
+    checkVod();
+    VodConfig.get().setHome(item);
+    setSiteText();
+    await homeContent();
+  }
+
+  void onChange() {
+  }
+
 }

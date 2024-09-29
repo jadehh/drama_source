@@ -132,6 +132,7 @@ class VodConfig {
     _flags!.clear();
     _parses!.clear();
     _jsLoader!.clear();
+    _jarLoader!.clear();
     _loadLive = true;
     return this;
   }
@@ -222,19 +223,19 @@ class VodConfig {
   }
 
   void _initParse(Map<String, dynamic> object) {
-    for (var element in object["parses"]) {
-      KParse parse = KParse.fromJson(element);
-      if (parse.getName() == (_config!.getParse()) && parse.getType() > 1) setParse(parse);
-      if (!_parses!.contains(parse)) _parses!.add(parse);
-    }
+      for (var element in Json.safeListElement(object, "parses")) {
+        KParse parse = KParse.fromJson(element);
+        if (parse.getName() == (_config!.getParse()) && parse.getType() > 1) setParse(parse);
+        if (!_parses!.contains(parse)) _parses!.add(parse);
+      }
   }
 
   void _initOther(Map<String, dynamic> object ) {
         if (_parses!.length > 0) _parses![0] =  KParse.god();
         if (_home == null) setHome(_sites!.isEmpty ?  Site() : _sites![0]);
         if (_parse == null) setParse(_parses!.isEmpty ?  KParse() : _parses![0]);
-        setRules(Rule.arrayFrom(object["rules"]));
-        setDoh(Doh.arrayFrom(object["doh"]));
+        setRules(Rule.arrayFrom(object.containsKey("rules")?object["rules"]:[]));
+        setDoh(Doh.arrayFrom(object.containsKey("doh") ? object["doh"]:[]));
         setFlags(Json.safeListString(object, "flags"));
         _setWall(Json.safeString(object, "wallpaper"));
         setAds(Json.safeListString(object, "ads"));
@@ -253,7 +254,10 @@ class VodConfig {
 
   Future<Spider> getSpider(Site site) async {
         bool js = site.getApi().contains(".js");
-        if (js) return (await _jsLoader!.getSpider(site.getKey(), site.getApi(), site.getExt()))!;
+        bool py = site.getApi().contains(".py");
+        bool csp = site.getApi().startsWith("csp_");
+        if (js) return (await _jsLoader!.getSpider(site.getKey(), site.getApi(), site.getExt()));
+        else if (csp) return (await _jarLoader!.getSpider(site.getKey(), site.getApi(), site.getExt(), site.getJar()));
         else return new SpiderNull();
     }
 

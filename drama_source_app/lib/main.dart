@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:drama_source_app/app/app_style.dart';
-import 'package:drama_source_app/app/constant.dart';
+import 'package:drama_source_app/app/constant.dart' as Constant;
 import 'package:drama_source_app/app/modules/other/debug_log_page.dart';
 import 'package:drama_source_app/routes/app_pages.dart';
 import 'package:drama_source_app/routes/route_path.dart';
@@ -14,6 +14,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:media_kit/media_kit.dart';
+import 'package:ok_http/ok_http.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter/material.dart';
@@ -23,14 +24,18 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:path/path.dart' as path;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await migrateData();
   await initWindow();
   MediaKit.ensureInitialized();
+
+  HttpClientCacheManger.initialize(OkHttp.instance);
+
   await Hive.initFlutter(
-    (!Platform.isAndroid && !Platform.isIOS) ? (await getApplicationSupportDirectory()).path : null,
+    (!Platform.isAndroid && !Platform.isIOS) ? path.join((await getApplicationCacheDirectory()).path, "hive") : null,
   );
   //初始化服务
   await DramaSourceCore.initServices();
@@ -66,13 +71,13 @@ Future migrateData() async {
     "danmushield",
   ];
   try {
-    var newDir = await getApplicationSupportDirectory();
+    var newDir = await getApplicationCacheDirectory();
     var hiveFile = File(p.join(newDir.path, "followuser.hive"));
     if (await hiveFile.exists()) {
       return;
     }
 
-    var oldDir = await getApplicationDocumentsDirectory();
+    var oldDir = await getApplicationCacheDirectory();
     for (var element in hiveFileList) {
       var oldFile = File(p.join(oldDir.path, "$element.hive"));
       if (await oldFile.exists()) {
@@ -114,7 +119,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppSettingsController.instance.initHomeSort(Constant.allHomePages);
+    AppSettingsController.instance.initHomeSort(Constant.Constant.allHomePages);
     bool isDynamicColor = AppSettingsController.instance.isDynamic.value;
     Color styleColor = Color(AppSettingsController.instance.styleColor.value);
     return DynamicColorBuilder(
@@ -133,11 +138,11 @@ class MyApp extends StatelessWidget {
             seedColor: styleColor, brightness: Brightness.dark);
       }
       return GetMaterialApp(
+        scrollBehavior: AppScrollBehavior(),
         title: Local.app_name.tr,
         theme: AppStyle.lightTheme.copyWith(colorScheme: lightColorScheme),
         darkTheme: AppStyle.darkTheme.copyWith(colorScheme: darkColorScheme),
-        themeMode:
-            ThemeMode.values[Get.find<AppSettingsController>().themeMode.value],
+        themeMode: ThemeMode.values[Get.find<AppSettingsController>().themeMode.value],
         initialRoute: RoutePath.kIndex,
         getPages: AppPages.routes,
         //国际化

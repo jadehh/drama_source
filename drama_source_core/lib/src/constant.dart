@@ -7,6 +7,10 @@
  * @Desc     :
  */
 class Constant {
+  static final String UserAgetHeader = "User-Agent";
+  static final String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
+
+
   //快進時間單位
   static final int INTERVAL_SEEK = 10 * 1000;
 

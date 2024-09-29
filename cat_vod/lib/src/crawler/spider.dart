@@ -27,8 +27,7 @@ abstract class Spider {
     return "";
   }
 
-  String categoryContent(
-      String tid, String pg, bool filter, HashMap<String, String> extend) {
+  Future<String> categoryContent(String tid, String pg, bool filter, Map<String, dynamic> extend) async{
     return "";
   }
 
@@ -48,7 +47,7 @@ abstract class Spider {
     return "";
   }
 
-  dynamic proxyLocal(Map<String, String> params)  {
+  Future<dynamic> proxyLocal(Map<String, String> params) async  {
         return null;
     }
 

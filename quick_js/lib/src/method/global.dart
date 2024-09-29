@@ -25,10 +25,35 @@ class Global{
   });
 
   static IsolateFunction http = IsolateFunction((String url,options) async{
-       options = Json.parse(jsonEncode( options));
-      var response = await OkHttp.instance.req(url,options);
-      var content = jsonEncode(response.data);
-      return {"code":response.statusCode, "headers": response.headers, "content": content};
+      options = Json.parse(jsonEncode( options));
+      try{
+        var response = await OkHttp.instance.req(url,options);
+        var resonseHeaders = response.headers.map;
+        var headers =  {};
+        for (var headerKey in resonseHeaders.keys){
+          var value = null;
+          try{
+            value  = jsonDecode(resonseHeaders[headerKey]![0]);
+          }catch(e){
+            value = resonseHeaders[headerKey]![0];
+          }
+          if (value.runtimeType == String || value.runtimeType == List<String>){
+            headers[headerKey] = value;
+          }
+        }
+        if (response is String){
+          var content = response.data.replaceAll("\\","");
+          return {"code":response.statusCode, "headers":headers, "content": content};
+        }else if (response.data is Map){
+          return {"code":response.statusCode, "headers":headers, "content": jsonEncode(response.data)};
+        }
+        else{
+          return {"code":response.statusCode, "headers":headers, "content": response.data};
+        }
+      }
+      catch(e){
+        return {"code":400,"headers":{},"content":base64Encode(utf8.encode(e.toString()))};
+      }
   });
 
   static Future<String> getProxy(bool local) async{
@@ -44,15 +69,17 @@ class Global{
     print(val);
   });
 
+  // static IsolateFunction _md5 = IsolateFunction((String text) async{
+  //   return await Util.md5(src: text);
+  // });
 
-
-    static List setPrint(){
+  static List setPrint(){
     return ["print",_print];
   }
 
   static List setMd5X(){
     return ["md5X",(String text) {
-        return Util.md5(text);
+        return Util.md5(src: text);
   }];
   } // 有返回值的不能用IsolateFunction，除非JS中使用await关键词
 

@@ -10,6 +10,7 @@
 
 import 'dart:io';
 
+import 'package:drama_source_core/drama_source_core.dart';
 import 'package:drama_source_core/src/requests/common_request.dart';
 import 'package:drama_source_log/drama_source_log.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -178,5 +179,23 @@ class Utils {
       ),
     );
     return result ?? false;
+  }
+
+  static Map<String,dynamic> getPic(String picUrl) {
+    var headers = {Constant.UserAgetHeader:Constant.userAgent};
+    var pic = picUrl;
+    if (pic.startsWith("//")) {
+      pic = 'https:$pic';
+    }else if (pic.contains("@")){
+      final strList = picUrl.split("@");
+      pic = strList[0];
+      for (var i = 1; i < strList.length;i++){
+        if(strList[i].contains("=")){
+          final headerSplit = strList[i].split("=");
+          headers[headerSplit[0]] = headerSplit[1];
+        }
+      }
+    }
+    return {"pic":pic,"headers":headers};
   }
 }

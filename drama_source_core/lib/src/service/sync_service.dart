@@ -29,7 +29,7 @@ class SyncService extends GetxService {
   UDP? udp;
   RxList<SyncClinet> scanClients = <SyncClinet>[].obs;
   static const int udpPort = 23235;
-  static const int httpPort = 23234;
+  static const int httpPort = 9978;
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   NetworkInfo networkInfo = NetworkInfo();
   HttpServer? server;
@@ -75,8 +75,7 @@ class SyncService extends GetxService {
       // 地址直接从datagram中获取，能收到回复说明地址是可以连通的
       var address = datagram.address.address;
       //检查是否已经存在
-      var index =
-          scanClients.indexWhere((element) => element.address == address);
+      var index = scanClients.indexWhere((element) => element.address == address);
       if (index == -1) {
         scanClients.add(
           SyncClinet(
@@ -171,10 +170,7 @@ class SyncService extends GetxService {
         var ipList = <String>[];
         for (var interface in interfaces) {
           for (var addr in interface.addresses) {
-            if (addr.type.name == 'IPv4' &&
-                !addr.address.startsWith('127') &&
-                !addr.isMulticast &&
-                !addr.isLoopback) {
+            if (addr.type.name == 'IPv4' && !addr.address.startsWith('127') && !addr.isMulticast && !addr.isLoopback) {
               ipList.add(addr.address);
               break;
             }
@@ -193,13 +189,8 @@ class SyncService extends GetxService {
     try {
       var serverRouter = Router();
       serverRouter.get('/', _helloRequest);
-
-
-      var server = await shelf_io.serve(
-        serverRouter,
-        InternetAddress.anyIPv4,
-        httpPort,
-      );
+      serverRouter.get('/proxy', _proxy);
+      var server = await shelf_io.serve(serverRouter, InternetAddress.anyIPv4, httpPort);
 
       // Enable content compression
       server.autoCompress = true;
@@ -221,9 +212,21 @@ class SyncService extends GetxService {
     return toJsonResponse({
       'status': true,
       'message': 'http server is running...',
-      "version":
-          'SimpeLive ${Platform.operatingSystem} v${Utils.packageInfo.version}',
+      "version": 'SimpeLive ${Platform.operatingSystem} v${Utils.packageInfo.version}',
     });
+  }
+
+  Future<shelf.Response> _proxy(shelf.Request request) async {
+    try {
+      var result = await VodConfig.get().proxyLocal(request.url.queryParameters);
+      return toDataResponse(result);
+    } catch (e,stackTrace) {
+      Log.e(e.toString(), stackTrace);
+      return toJsonResponse({
+        'status': false,
+        'message': e.toString(),
+      });
+    }
   }
 
   /// 发送自己的信息
@@ -249,6 +252,32 @@ class SyncService extends GetxService {
       encoding: Encoding.getByName('utf-8'),
     );
   }
+
+  shelf.Response toDataResponse(String resp) {
+    var response = jsonDecode(resp);
+    Map<String, dynamic> dynamicHeaders= response["headers"];
+
+    Map<String, Object> headers = {};
+
+    dynamicHeaders.forEach((key, value) {
+      if (value.runtimeType == int){
+        headers[key] = value.toString() as Object;
+      }else{
+        headers[key] = value as Object;
+      }
+    });
+    if (response["code"] == 200){
+      return shelf.Response.ok(
+          response["content"],
+          headers: headers
+      );
+    }else{
+      return shelf.Response.ok(response["data"],headers: {"Content-Type": "application/json"});
+    }
+
+  }
+
+
 
   @override
   void onClose() {

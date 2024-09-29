@@ -14,7 +14,9 @@ dependencies:
   drama_source_log:
     path: ../drama_source_log
 
-  dio: ^5.6.0 #网络请求
+  dio: ^5.7.0 #网络请求
+  flutter_cache_manager: ^3.4.1
+
 
 dev_dependencies:
   flutter_test:

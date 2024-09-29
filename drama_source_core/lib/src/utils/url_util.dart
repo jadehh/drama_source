@@ -29,21 +29,17 @@ class UrlUtil {
     String schemeStr = scheme(url);
     if ("clan" == schemeStr) return convert(fixUrl(url));
     if ("local" == schemeStr)
-      return url.replaceAll(
-          "local://", await SyncService.get().getAddressByPath(""));
+      return url.replaceAll("local://", await SyncService.get().getAddressByPath(""));
     if ("assets" == schemeStr)
-      return url.replaceAll(
-          "assets://", await SyncService.get().getAddressByPath(""));
+      return url.replaceAll("assets://", await SyncService.get().getAddressByPath(""));
     if ("file" == schemeStr)
-      return url.replaceAll(
-          "file://", await SyncService.get().getAddressByPath("file/"));
+      return url.replaceAll("file://", await SyncService.get().getAddressByPath("file/"));
     if ("proxy" == schemeStr)
-      return url.replaceAll(
-          "proxy://", await SyncService.get().getAddressByPath("proxy?"));
+      return url.replaceAll("proxy://", await SyncService.get().getAddressByPath("proxy?"));
     return url;
   }
 
-  static Future<String> resolve(String baseUri, String referenceUri) async {
+  static String resolve(String baseUri, String referenceUri)  {
    return uri(baseUri).resolve(referenceUri).toString();
   }
 
