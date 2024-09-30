@@ -10,7 +10,9 @@ import 'dart:convert';
 
 import 'package:cat_vod/cat_vod.dart';
 import 'package:drama_source_core/drama_source_core.dart';
+import 'package:drama_source_core/src/api/bean/flag.dart';
 import 'package:drama_source_log/drama_source_log.dart';
+import 'package:get/get.dart';
 import 'package:ok_http/requests/ok_http.dart';
 
 class SiteViewModel {
@@ -99,6 +101,43 @@ class SiteViewModel {
       Log.SpiderDebug(categoryContent);
       return Result.fromType(site.getType(), categoryContent);
     }
+  }
+
+  void _checkThunder(List<Flag> flags) {
+
+}
+
+  Future<Result>  detailContent(String id) async {
+    Site site = VodConfig.get().getSite(this.key!);
+    if (site.getType() == 3) {
+      Spider spider = await VodConfig.get().getSpider(site);
+      String detailContent = await spider.detailContent([id]);
+      Log.SpiderDebug(detailContent);
+      VodConfig.get().setRecent(site);
+      Result result = Result.fromJson(Json.parse(detailContent));
+      if (!result.getList().isEmpty) result.getList()[0].setVodFlags();
+      if (!result.getList().isEmpty) _checkThunder(result.getList()[0].getVodFlags());
+      return result;
+    } else if (site.isEmpty() && "push_agent" == (key)) {
+      Vod vod = new Vod();
+      vod.setVodId(id);
+      vod.setVodName(id);
+      vod.setVodPic("https://pic.rmb.bdstatic.com/bjh/1d0b02d0f57f0a42201f92caba5107ed.jpeg");
+      vod.setVodFlags(vodFlags: Flag.createList(Local.push.tr, Local.play.tr, id));
+      _checkThunder(vod.getVodFlags());
+      return Result.vod(vod);
+    } else {
+      Map<String,String> params = {};
+      params["ac"] =  site.getType() == 0 ? "videolist" : "detail";
+      params["ids"] = id;
+      String detailContent = await _call(site, params, true);
+      Log.SpiderDebug(detailContent);
+      Result result = Result.fromType(site.getType(), detailContent);
+      if (!result.getList().isEmpty) result.getList()[0].setVodFlags();
+      if (!result.getList().isEmpty) _checkThunder(result.getList()[0].getVodFlags());
+      return result;
+    }
+
   }
 
 }

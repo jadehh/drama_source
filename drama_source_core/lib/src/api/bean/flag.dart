@@ -7,6 +7,8 @@
  * @Desc     :
  */
 
+import 'dart:io';
+
 import 'package:cat_vod/cat_vod.dart';
 import 'package:drama_source_core/src/api/bean/episode.dart';
 import 'package:drama_source_log/drama_source_log.dart';
@@ -55,6 +57,9 @@ class Flag {
     return new Flag(flag: flag);
   }
 
+
+
+
   String getShow() {
     return TextUtils.isEmpty(j_show) ? getFlag() : j_show!;
   }
@@ -92,7 +97,7 @@ class Flag {
     List<String> urls = data.contains("#") ? data.split("#") : [data];
     for (int i = 0; i < urls.length; i++) {
       List<String> split = urls[i].split(r"\\$");
-      String number = sprintf( "{Platform.localeName}%02d", i + 1);
+      String number = (i+1).toString();
       Episode episode = split.length > 1 ? Episode.create(name:split[0].isEmpty ? number : split[0].trim(), url:split[1]) : Episode.create(name: number, url:urls[i]);
       if (!getEpisodes().contains(episode)) getEpisodes().add(episode);
     }

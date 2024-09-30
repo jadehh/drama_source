@@ -75,6 +75,18 @@ class Spider extends CatVod.Spider {
   }
 
   @override
+  Future<String> detailContent(List<String> ids) async {
+    try {
+      return await _ctx!.evaluate("__JS_SPIDER__.detail(${jsonEncode(ids)})");
+    } catch (e, stackTrace) {
+      Log.e(e.toString(), stackTrace);
+      return "";
+    }
+  }
+
+
+
+  @override
   Future<dynamic> proxyLocal(Map<String, String> params)  async{
     if (params.containsKey("from")) {
       if (params["from"] == "catvod") {

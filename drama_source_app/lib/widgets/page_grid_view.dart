@@ -59,31 +59,6 @@ class PageGridView extends StatelessWidget {
               mainAxisSpacing: mainAxisSpacing,
             ),
           ),
-
-          Positioned(
-            bottom: 12,
-            right: 12,
-            child: // 加载更多按钮
-                Visibility(
-                  visible:
-                  pageController.canLoadMore.value &&
-                  !pageController.pageLoadding.value &&
-                  !pageController.pageEmpty.value &&
-                  showPCRefreshButton,
-              child: Center(
-                child: IconButton(
-                  style: IconButton.styleFrom(
-                    backgroundColor: Get.theme.cardColor.withOpacity(.8),
-                    elevation: 4,
-                  ),
-                  onPressed: () {
-                    pageController.easyRefreshController.callRefresh();
-                  },
-                  icon: const Icon(Icons.refresh),
-                ),
-              ),
-            ),
-          ),
           Offstage(
             offstage: !pageController.pageEmpty.value,
             child: AppEmptyWidget(

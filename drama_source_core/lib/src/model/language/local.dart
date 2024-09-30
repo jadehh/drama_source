@@ -22,6 +22,16 @@ class Local {
 
   //<!-- Vod -->
   static const String vod_home = "推荐";
+
+
+  //<!-- Play -->
+
+  static const String play = "播放";
+
+  //<!-- Push
+  static const String push = "推送";
+
+
   //Setting
   static const String setting_vod = "点播";
   static const String setting_live = "直播";

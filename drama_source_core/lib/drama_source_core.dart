@@ -44,6 +44,7 @@ export 'src/api/bean/k_class.dart';
 export 'src/api/bean/vod.dart';
 export 'src/constant.dart';
 export 'src/impl/site_callback.dart';
+export 'src/impl/filter_call_back.dart';
 
 export 'src/model/site_view_model.dart';
 

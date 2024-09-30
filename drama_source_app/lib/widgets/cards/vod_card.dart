@@ -23,8 +23,9 @@ class VodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShadowCard(
-      onTap: () {
+      onTap: () async {
         Log.i("详情界面,id:${vod.getVodId()}");
+        Result result = await siteViewModel.detailContent(vod.getVodId());
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +47,7 @@ class VodCard extends StatelessWidget {
                 Positioned(
                   right: 0,
                   left: 0,
-                  bottom: 25,
+                  bottom: 28,
                   child: Text(vod.getVodRemarks(),
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left, // 文本居中对齐

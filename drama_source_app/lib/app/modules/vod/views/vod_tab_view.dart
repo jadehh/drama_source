@@ -22,7 +22,7 @@ class VodTabView extends StatelessWidget {
     return Column(children: [
       TabBar(
         indicatorColor: Colors.transparent,
-        labelPadding: AppStyle.edgeInsetsA8,
+        labelPadding: AppStyle.edgeInsetsA4,
         controller: vodController.tabController,
         isScrollable: true,
         tabAlignment: TabAlignment.start,

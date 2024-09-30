@@ -31,7 +31,7 @@ abstract class Spider {
     return "";
   }
 
-  String detailContent(List<String> ids) {
+  Future<String>  detailContent(List<String> ids) async{
     return "";
   }
 

@@ -7,6 +7,7 @@
  * @Desc     :
  */
 import 'dart:async';
+import 'package:drama_source_app/app/app_style.dart';
 import 'package:drama_source_app/app/modules/vod/controllers/vod_list_controller.dart';
 import 'package:drama_source_app/app/modules/vod/views/vod_page_view.dart';
 import 'package:drama_source_app/widgets/button/highlight_button.dart';
@@ -98,19 +99,42 @@ class VodController extends GetxController with GetTickerProviderStateMixin {
     clear();
     for (int i = 0; i < result.value.getClass().length; i++) {
       AppFocusNode appFocusNode = AppFocusNode();
+      if(i == 0){
+        appFocusNode.requestFocus();
+      }
       _focusList.add(appFocusNode);
       var type_id = result.value.getClass()[i].getTypeId();
       // tabs.add(TypeView(title: "V$i", index: tabIndex.value, tabController: tabController));
-      tabs.add(Obx(() => HighlightButton(
-            focusNode: appFocusNode,
-            text: result.value.getClass()[i].getTypeName(),
-            selected: tabIndex.value == i,
-            onTap: () {
-              tabController.animateTo(i);
-            },
-          )));
-      var filters =  result.value.getFilters()[type_id] ;
+      // tabs.add(Obx(() => OutlinedButton(
+      //   child: Text(result.value.getClass()[i].getTypeName()),
+      //       onPressed: (){
+      //         for(var focusNode in _focusList){
+      //           focusNode.isFoucsed.value = false;
+      //         }
+      //         _focusList[i].isFoucsed.value = true;
+      //         tabController.animateTo(i);
+      //       },
+      //       style: AppStyle.tabOutLinedButtonStyle(_focusList[i].isFoucsed.value),
+      //       focusNode: _focusList[i],
+      //     )));
 
+      tabs.add(Obx(() => MaterialButton(
+        height: 30,
+        minWidth: 30,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          side: BorderSide(color: Colors.black.withOpacity(0.1), width: 2.0),
+        ),
+        textColor: Colors.white,
+        child: Text(result.value.getClass()[i].getTypeName(),style: TextStyle(fontSize: 12),),
+        hoverColor: Colors.black.withOpacity(0.2),
+        focusColor: Colors.black.withOpacity(0.5),
+        onPressed: (){
+          tabController.animateTo(i);
+        },
+        focusNode: _focusList[i],
+      )));
+      var filters =  result.value.getFilters()[type_id] ;
       Get.put(VodListController(mViewModel,filters,type_id), tag: result.value.getClass()[i].getTypeId());
       items.add(VodPageView(tag: result.value.getClass()[i].getTypeId()));
     }

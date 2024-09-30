@@ -118,17 +118,8 @@ class BasePageController<T> extends BaseController {
     return [];
   }
 
-
-
   void scrollToTopOrRefresh() {
-    if (scrollController.offset > 0) {
-      scrollController.animateTo(
-        0,
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.linear,
-      );
-    } else {
-      easyRefreshController.callRefresh();
-    }
+    if (scrollController.offset > 0) scrollController.animateTo(0, duration: const Duration(milliseconds: 200),curve: Curves.linear);
+     else easyRefreshController.callRefresh();
   }
 }

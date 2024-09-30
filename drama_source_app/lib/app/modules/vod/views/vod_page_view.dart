@@ -30,18 +30,45 @@ class VodPageView extends StatelessWidget {
       c = 2;
     }
     return KeepAliveWrapper(
-      child: PageGridView(
-        pageController: controller,
-        padding: AppStyle.edgeInsetsA12,
-        firstRefresh: true,
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 12,
-        crossAxisCount: c,
-        itemBuilder: (_, i) {
-          var item = controller.list[i];
-          return VodCard(controller.siteViewModel, item);
-        },
+      child: Stack(
+        children: [
+          PageGridView(
+            pageController: controller,
+            padding: AppStyle.edgeInsetsA12,
+            firstRefresh: true,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            crossAxisCount: c,
+            itemBuilder: (_, i) {
+              var item = controller.list[i];
+              return VodCard(controller.siteViewModel, item);
+            },
+          ),
+          Obx(()=>Visibility(child: Positioned(
+            right: 32.0,
+            bottom: 16.0,
+            child: FloatingActionButton(
+              backgroundColor: Colors.blue,
+              onPressed: () async{
+               controller.showFilterDialog();
+              },
+              child: Icon(controller.typeId != "home" ? Icons.filter_alt:Icons.link,color: Colors.white,),
+            ),
+          ),visible:controller.filterVisable.value)),
+          Obx(()=>Visibility(child: Positioned(
+            right: 32.0,
+            bottom: 16.0,
+            child: FloatingActionButton(
+              backgroundColor: Colors.blue,
+              onPressed: () async{
+                controller.scrollToTopOrRefresh();
+              },
+              child: Icon(Icons.arrow_upward,color: Colors.white,),
+            ),
+          ),visible:!controller.filterVisable.value)),
+        ],
       ),
+
     );
   }
 }

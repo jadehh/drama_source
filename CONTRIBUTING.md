@@ -15,6 +15,7 @@
 * 支持Android端Jar 爬虫
 * Android端使用原生的jar爬虫，其他客户端使用Jar运行Jar包，使用Golang进行调试
 * 网络服务使用Golang
+* 首页二级菜单完成
 <details onclose>
 <summary>查看更多更新日志</summary>
 

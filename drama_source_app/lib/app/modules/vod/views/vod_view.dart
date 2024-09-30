@@ -58,7 +58,7 @@ class VodView extends GetView<VodController> {
               ,visible: controller.vodVisable.value)),
         ]),
         Obx(()=>Visibility(child: Positioned(
-          right: 16.0,
+          right: 32.0,
           bottom: 16.0,
           child: FloatingActionButton(
             backgroundColor: Colors.blue,

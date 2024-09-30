@@ -265,6 +265,53 @@ class AppStyle {
   }
 
 
+  static ButtonStyle tabOutLinedButtonStyle(bool selected) {
+    return ButtonStyle(
+      minimumSize: WidgetStateProperty.all(
+        const Size(20, 30), // 设置按钮的最小宽度和高度
+      ),
+      textStyle: WidgetStateProperty.all(TextStyle(fontSize: 12)),
+      shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))
+      ),
+      foregroundColor:  WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+        return Colors.white;
+      }),
+      overlayColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+        if (states.contains(WidgetState.focused) || states.contains(WidgetState.pressed) || selected) {
+          return Colors.black.withOpacity(0.1); // 选中状态下的颜色
+        }
+        return Colors.black.withOpacity(0.2);
+      }),
+      backgroundColor: WidgetStateProperty.all(Colors.black.withOpacity(0.1)),
+    );
+  }
+
+  static ButtonStyle filterOutLinedButtonStyle(bool selected) {
+    return ButtonStyle(
+      side: WidgetStateProperty.all(
+        BorderSide(color: Colors.black,width: 0.5), // 设置边框颜色为蓝色
+      ),
+      shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
+      ),
+      foregroundColor:  WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+        if(states.contains(WidgetState.focused) || states.contains(WidgetState.pressed) || selected){
+            return Colors.blue;
+          }else{
+          return Colors.black;
+        }
+      }),
+      overlayColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+        if (states.contains(WidgetState.focused) || states.contains(WidgetState.pressed)) {
+          return Colors.black.withOpacity(0.1); // 选中状态下的颜色
+        }
+        return null;
+      }),
+      backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
+    );
+  }
+
   static ButtonStyle lightOutLineButtonNormalStyle() {
     return ButtonStyle(
       side: WidgetStateProperty.all(
